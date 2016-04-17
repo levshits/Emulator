@@ -1,12 +1,144 @@
-﻿<Window x:Class="Emulator.MainWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:Emulator"
+        xmlns:models="clr-namespace:Emulator.Models"
+        xmlns:viewModels="clr-namespace:Emulator.ViewModels"
+        xmlns:Converters="clr-namespace:MaterialDesignThemes.Wpf.Converters;assembly=MaterialDesignThemes.Wpf" x:Class="Emulator.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="Water emulation" Height="600" Width="650"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        Icon="photo.jpg" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary
+                    Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+                <ResourceDictionary
+                    Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Shadows.xaml" />
+                <ResourceDictionary
+                    Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ToggleButton.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <DataTemplate DataType="{x:Type models:FilterModel}">
+                <materialDesign:Card UseLayoutRounding="True" Margin="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <StackPanel Orientation="Horizontal">
+                        <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" 
+                        HorizontalAlignment="Left" VerticalAlignment="Center"
+                        Margin="20 15 10 15">
+                            <materialDesign:PackIcon Kind="PlusOne" />
+                        </Button>
+                        <StackPanel Margin="8 24 8 10" >
+                            <TextBlock FontWeight="Bold" Text="{Binding FilterName}"/>
+                            <TextBlock TextWrapping="Wrap" Text="{Binding Description}" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </StackPanel>
+                </materialDesign:Card>
+            </DataTemplate>
+            <Style x:Key="ExitecButtonTemplate" TargetType="{x:Type Button}">
+                <Setter Property="FocusVisualStyle">
+                    <Setter.Value>
+                        <Style>
+                            <Setter Property="Control.Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+                                        <Rectangle Margin="2" SnapsToDevicePixels="True" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="Background" Value="{DynamicResource PrimaryHueMidBrush}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource PrimaryHueMidBrush}"/>
+                <Setter Property="Foreground" Value="{DynamicResource PrimaryHueMidForegroundBrush}"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="materialDesign:ShadowAssist.ShadowDepth" Value="Depth1"/>
+                <Setter Property="FontWeight" Value="SemiBold"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="Padding" Value="16,4"/>
+                <Setter Property="Height" Value="32"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Grid Width="32" Margin="18.307,0,26.307,0" Height="32">
+                                <AdornerDecorator d:IsLocked="True">
+                                    <AdornerDecorator.CacheMode>
+                                        <BitmapCache EnableClearType="True" SnapsToDevicePixels="True"/>
+                                    </AdornerDecorator.CacheMode>
+                                    <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" CornerRadius="16" HorizontalAlignment="Stretch" Width="Auto" RenderTransformOrigin="1.051,0.531">
+                                        <Border.Effect>
+                                            <Binding Path="(materialDesign:ShadowAssist.ShadowDepth)" RelativeSource="{RelativeSource TemplatedParent}">
+                                                <Binding.Converter>
+                                                    <Converters:ShadowConverter/>
+                                                </Binding.Converter>
+                                            </Binding>
+                                        </Border.Effect>
+                                    </Border>
+                                </AdornerDecorator>
+                                <materialDesign:Ripple ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" Focusable="False" Feedback="White" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" RenderTransformOrigin="0.533,0.453" Margin="0" HorizontalAlignment="Stretch" Width="Auto"/>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="materialDesign:ShadowAssist.Darken" TargetName="border" Value="True"/>
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="Opacity" Value="0.23"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Window.FontFamily>
+        <StaticResource ResourceKey="MaterialDesignFont"/>
+    </Window.FontFamily>
+    <Window.DataContext>
+        <viewModels:MainViewModel/>
+    </Window.DataContext>
     <Grid>
-        
+        <DockPanel>
+            <Grid MinWidth="300" DockPanel.Dock="Left">
+                <Image x:Name="___Emulator_component_01_01_png" Margin="-37.363,10,-54.892,0" Source="/Emulator;component/01-01.png" Stretch="Fill" HorizontalAlignment="Left" Width="394.062"/>
+                <Grid Margin="118.5,228.833,106.693,226">
+                    <Button x:Name="button" Content="Button" VerticalAlignment="Top" RenderTransformOrigin="0,0.188" Style="{DynamicResource ExitecButtonTemplate}" FontSize="8" HorizontalAlignment="Left" Width="76.614" Margin="0,4.668,0,0"/>
+                    <Button x:Name="button_Copy" Content="Button" RenderTransformOrigin="0,0.188" Style="{DynamicResource ExitecButtonTemplate}" VerticalAlignment="Bottom" FontSize="8" HorizontalAlignment="Left" Width="76.614" Margin="0,0,0,15.34"/>
+                    <Button x:Name="button_Copy1" Content="Button" Margin="0,36.497,0,47.669" RenderTransformOrigin="0,0.188" Style="{DynamicResource ExitecButtonTemplate}" FontSize="8"/>
+                </Grid>
+                <Grid Height="66.5" Margin="123,140,120.807,0" VerticalAlignment="Top"/>
+            </Grid>
+            <Grid MinWidth="320" DockPanel.Dock="Top">
+                <Image Source="../Images/1.jpg" Height="250" StretchDirection="UpOnly"/>
+            </Grid>
+            <Grid MinWidth="320" DockPanel.Dock="Bottom" HorizontalAlignment="Center">
+                <StackPanel HorizontalAlignment="Center">
+                    <ListView HorizontalAlignment="Center" ItemsSource="{Binding FilterModels}" Margin="0" AllowDrop="True" BorderBrush="{x:Null}" Foreground="Black" Background="{x:Null}" Focusable="False" Height="318" >
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="0,0,0,0" VerticalAlignment="Stretch" MinWidth="300" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                                    <ContentControl Content="{Binding .}" HorizontalAlignment="Stretch"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackPanel>
+            </Grid>
+
+        </DockPanel>
+
+
     </Grid>
 </Window>
+
