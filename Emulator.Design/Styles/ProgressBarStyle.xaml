@@ -37,8 +37,8 @@
                                 </TransformGroup>
                             </ed:Arc.RenderTransform>
                         </ed:Arc>
-                        <TextBlock x:Name="Min" Margin="0,0,0,5.425" TextWrapping="Wrap" Text="{TemplateBinding MinValueLabel}" VerticalAlignment="Bottom" FontSize="4" Foreground="#FF010002" HorizontalAlignment="Left" Width="8.187"/>
-                        <TextBlock x:Name="Max" Margin="0,0,0,5.425" TextWrapping="Wrap" Text="{TemplateBinding MaxValueLabel}" VerticalAlignment="Bottom" FontSize="4" Foreground="#FF010002" HorizontalAlignment="Right" Width="8.187"/>
+                        <TextBlock x:Name="Min" Margin="0,0,0,5.425" TextWrapping="Wrap" Text="{TemplateBinding MinValueLabel}" VerticalAlignment="Bottom" FontSize="8" Foreground="#FF010002" HorizontalAlignment="Left" Width="18.104" TextAlignment="Center" FontFamily="a_LCDNovaObl"/>
+                        <TextBlock x:Name="Max" Margin="0,0,0,5.425" TextWrapping="Wrap" Text="{TemplateBinding MaxValueLabel}" VerticalAlignment="Bottom" FontSize="8" Foreground="#FF010002" HorizontalAlignment="Right" Width="19.937" TextAlignment="Center" FontFamily="a_LCDNovaObl"/>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>

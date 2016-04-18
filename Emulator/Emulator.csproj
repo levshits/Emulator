@@ -86,6 +86,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Models\ExitecModel.cs" />
     <Compile Include="Models\FilterModel.cs" />
     <Compile Include="Models\ModelBase.cs" />
     <Compile Include="Properties\Annotations.cs" />

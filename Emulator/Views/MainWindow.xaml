@@ -44,6 +44,43 @@
                     </StackPanel>
                 </materialDesign:Card>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type models:ExitecModel}">
+
+            </DataTemplate>
+            <DataTemplate x:Key="ExitechViewTemplate">
+                <Grid>
+                    <Grid Margin="-135,-68,-157.05,134">
+                        <Image x:Name="___Emulator_component_01_01_png" Margin="0,10,0,-10" Source="/Emulator;component/01-01.png" Stretch="Fill" HorizontalAlignment="Stretch" Width="Auto" Height="Auto" VerticalAlignment="Stretch"/>
+                        <Grid Height="97" Margin="243,199,267.05,0" VerticalAlignment="Top" HorizontalAlignment="Stretch" Width="Auto">
+                            <TextBlock x:Name="textBlock" Margin="29.884,0,0,-8.659" TextWrapping="Wrap" Text="28.6" VerticalAlignment="Bottom" FontFamily="Digital-7 Mono" FontSize="18.667" Height="19.025"/>
+                            <TextBlock x:Name="textBlock_Copy" Margin="15.667,0,-5.661,12.442" TextWrapping="Wrap" FontFamily="Ticking Timebomb BB" FontSize="26.667" Height="29.6" VerticalAlignment="Bottom"><Run Text="28.60"/></TextBlock>
+                            <TextBlock x:Name="textBlock_Copy1" Margin="0,80.975,0,1.322" TextWrapping="Wrap" Text="°C" VerticalAlignment="Stretch" FontFamily="Digital-7 Mono" FontSize="9.333" Height="Auto" RenderTransformOrigin="1.119,0.093" HorizontalAlignment="Right" Width="12.007"/>
+                            <TextBlock x:Name="textBlock_Copy2" Margin="0,80.921,0.5,1.376" TextWrapping="Wrap" Text=" F" VerticalAlignment="Stretch" FontFamily="Digital-7 Mono" FontSize="9.333" Height="Auto" RenderTransformOrigin="1.119,0.093" HorizontalAlignment="Right" Width="12.007"/>
+                            <controls:ArcProgressBar Height="Auto" Margin="2.943,10.171,5,49.704" VerticalAlignment="Stretch" Style="{DynamicResource ArcProgressBarStyle}" MaxValueLabel="180" MinValueLabel="0"/>
+                        </Grid>
+                        <StackPanel Margin="244.331,348.334,265.719,328.666" Height="Auto" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="Auto" d:LayoutOverrides="HorizontalAlignment" d:IsLocked="True">
+                            <Button x:Name="button" FontSize="8" Height="47" Width="47"  Style="{StaticResource RoundedButton}" Margin="0,0,0,2">
+                                <StackPanel>
+                                    <TextBlock TextAlignment="Center" FontSize="10" FontWeight="DemiBold" ><Run Text="Mode"/></TextBlock>
+                                    <TextBlock TextAlignment="Center" FontSize="10" FontWeight="DemiBold"><Run Text="Hold"/></TextBlock>
+                                </StackPanel>
+                            </Button>
+                            <Button x:Name="button_Copy"  Height="47" Width="47"  Style="{StaticResource RoundedButton}" FontSize="8" >
+                                <StackPanel>
+                                    <TextBlock TextAlignment="Center" FontSize="10" FontWeight="DemiBold"><Run Text="Call"/></TextBlock>
+                                    <TextBlock TextAlignment="Center" FontSize="10" FontWeight="DemiBold"><Run Text="Recall"/></TextBlock>
+                                </StackPanel>
+                            </Button>
+                            <Button x:Name="button_Copy1" Height="47" Width="47" Style="{StaticResource RoundedButton}" FontSize="8" Margin="18.668,0,18.331,0" HorizontalAlignment="Stretch" >
+                                <StackPanel>
+                                    <TextBlock FontSize="10" FontWeight="DemiBold" TextAlignment="Center"><Run Text="On"/></TextBlock>
+                                    <TextBlock FontSize="10" FontWeight="DemiBold" TextAlignment="Center"><Run Text="Off"/></TextBlock>
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </DataTemplate>
         </ResourceDictionary>
     </Window.Resources>
     <Window.FontFamily>
@@ -55,40 +92,16 @@
     <Grid>
         <DockPanel>
             <Grid Width="302">
-                <Grid d:LayoutOverrides="Width">
-                    <Image x:Name="___Emulator_component_01_01_png" Margin="-81,-23,-82,-69" Source="/Emulator;component/01-01.png" Stretch="Fill" HorizontalAlignment="Left" Width="465" Height="663" VerticalAlignment="Top"/>
-                    <Grid Height="77" Margin="109,132,127,0" VerticalAlignment="Top">
-                        <TextBlock x:Name="textBlock" Margin="16.545,0,13.339,0" TextWrapping="Wrap" Text="28.6" VerticalAlignment="Bottom" FontFamily="Digital-7 Mono" FontSize="18.667" Height="19.025"/>
-                        <TextBlock x:Name="textBlock_Copy" Margin="4.667,29.724,5.339,0" TextWrapping="Wrap" FontFamily="Ticking Timebomb BB" FontSize="26.667" Height="26.834" VerticalAlignment="Top"><Run Text="28.60"/></TextBlock>
-                        <TextBlock x:Name="textBlock_Copy1" Margin="0,0,0,10" TextWrapping="Wrap" Text="°C" VerticalAlignment="Bottom" FontFamily="Digital-7 Mono" FontSize="9.333" Height="9.025" RenderTransformOrigin="1.119,0.093" HorizontalAlignment="Right" Width="12.007"/>
-                        <TextBlock x:Name="textBlock_Copy2" Margin="0,0,0.666,2.341" TextWrapping="Wrap" Text=" F" VerticalAlignment="Bottom" FontFamily="Digital-7 Mono" FontSize="9.333" Height="9.025" RenderTransformOrigin="1.119,0.093" HorizontalAlignment="Right" Width="12.007"/>
-                        <controls:ArcProgressBar Height="17.125" Margin="4,4.833,3.943,0" VerticalAlignment="Top" Style="{DynamicResource ArcProgressBarStyle}" MaxValueLabel="180" MinValueLabel="0"/>
-                    </Grid>
-                    <StackPanel Margin="106,241,121,0" Height="136" VerticalAlignment="Top">
-                        <Button x:Name="button" FontSize="8" Height="38" Width="38"  Style="{StaticResource RoundedButton}">
-                            <StackPanel>
-                                <TextBlock TextAlignment="Center" FontSize="10" FontWeight="DemiBold" ><Run Text="Mode"/></TextBlock>
-                                <TextBlock TextAlignment="Center" FontSize="10" FontWeight="DemiBold"><Run Text="Hold"/></TextBlock>
-                            </StackPanel>
-                        </Button>
-                        <Button x:Name="button_Copy"  Height="38" Width="38"  Style="{StaticResource RoundedButton}" FontSize="8" >
-                            <StackPanel>
-                                <TextBlock TextAlignment="Center" FontSize="10" FontWeight="DemiBold"><Run Text="Call"/></TextBlock>
-                                <TextBlock TextAlignment="Center" FontSize="10" FontWeight="DemiBold"><Run Text="Recall"/></TextBlock>
-                            </StackPanel>
-                        </Button>
-                        <Button x:Name="button_Copy1" Height="38" Width="Auto"  Style="{StaticResource RoundedButton}" FontSize="8" Margin="18.002,0,18.998,0" HorizontalAlignment="Stretch" >
-                            <StackPanel>
-                                <TextBlock FontSize="10" FontWeight="DemiBold" TextAlignment="Center"><Run Text="On"/></TextBlock>
-                                <TextBlock FontSize="10" FontWeight="DemiBold" TextAlignment="Center"><Run Text="Off"/></TextBlock>
-                            </StackPanel>
-                        </Button>
-                    </StackPanel>
-                </Grid>
+                <StackPanel Orientation="Vertical" d:LayoutOverrides="Height">
+                    <ToggleButton x:Name="toggleButton" Content="ToggleButton" Margin="0,6,0,0"/>
+                    <ScrollViewer Height="571" VerticalScrollBarVisibility="Disabled" Margin="0,10,0,0">
+                        <ContentControl Content="{Binding DeviceModel}" Height="913" Width="302" ContentTemplate="{DynamicResource ExitechViewTemplate}"/>
+                    </ScrollViewer>
+                </StackPanel>
             </Grid>
             <Grid MinWidth="320" DockPanel.Dock="Top" Margin="0,0,10,0">
                 <StackPanel Orientation="Vertical" d:LayoutOverrides="Height">
-                    <Grid Height="32" Margin="0,5.9,0,0">
+                    <Grid Height="32" Margin="0,6,0,0">
 
                         <Button x:Name="button1" Content="Reset" HorizontalAlignment="Right" Margin="0,0,10,0" Width="120"/>
                         <ComboBox x:Name="comboBox" Margin="10,0,135,0" VerticalAlignment="Stretch"/>
