@@ -1,0 +1,48 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Emulator.Design"
+                    xmlns:controls="clr-namespace:Emulator.Design.Controls"
+                    xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing">
+    <Style x:Key="ArcProgressBarStyle" TargetType="{x:Type controls:ArcProgressBar}">
+        <Setter Property="Foreground" Value="{DynamicResource PrimaryHueDarkBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource PrimaryHueLightBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource PrimaryHueLightBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Value" Value="90"/>
+        <Setter Property="Minimum" Value="0"/>
+        <Setter Property="Maximum" Value="180"/>
+        <Setter Property="MinValueLabel" Value="0"/>
+        <Setter Property="MaxValueLabel" Value="180"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:ArcProgressBar}">
+                    <Grid Margin="0,0,0,-6">
+                        <ed:Arc ArcThickness="3" EndAngle="{TemplateBinding Value}" Fill="Black" Stretch="None" Stroke="Black" StartAngle="0" RenderTransformOrigin="0.5,0.5" Margin="18,-14">
+                            <ed:Arc.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="-90.0"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </ed:Arc.RenderTransform>
+                        </ed:Arc>
+                        <ed:Arc ArcThickness="0" EndAngle="180" Fill="Black" Stretch="None" Stroke="Black" StartAngle="0" RenderTransformOrigin="0.5,0.5" Margin="18,-14">
+                            <ed:Arc.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="-90.0"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </ed:Arc.RenderTransform>
+                        </ed:Arc>
+                        <TextBlock x:Name="Min" Margin="0,0,0,5.425" TextWrapping="Wrap" Text="{TemplateBinding MinValueLabel}" VerticalAlignment="Bottom" FontSize="4" Foreground="#FF010002" HorizontalAlignment="Left" Width="8.187"/>
+                        <TextBlock x:Name="Max" Margin="0,0,0,5.425" TextWrapping="Wrap" Text="{TemplateBinding MaxValueLabel}" VerticalAlignment="Bottom" FontSize="4" Foreground="#FF010002" HorizontalAlignment="Right" Width="8.187"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

@@ -7,7 +7,9 @@
         xmlns:local="clr-namespace:Emulator"
         xmlns:models="clr-namespace:Emulator.Models"
         xmlns:viewModels="clr-namespace:Emulator.ViewModels"
-        xmlns:Converters="clr-namespace:MaterialDesignThemes.Wpf.Converters;assembly=MaterialDesignThemes.Wpf" x:Class="Emulator.MainWindow"
+        xmlns:Converters="clr-namespace:MaterialDesignThemes.Wpf.Converters;assembly=MaterialDesignThemes.Wpf"
+        xmlns:controls="clr-namespace:Emulator.Design.Controls;assembly=Emulator.Design"
+        x:Class="Emulator.MainWindow"
         mc:Ignorable="d"
         Title="Water emulation" Height="600" Width="650"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -28,7 +30,7 @@
                     Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ToggleButton.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <DataTemplate DataType="{x:Type models:FilterModel}">
-                <materialDesign:Card UseLayoutRounding="True" Margin="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <materialDesign:Card UseLayoutRounding="True" Margin="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                     <StackPanel Orientation="Horizontal">
                         <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" 
                         HorizontalAlignment="Left" VerticalAlignment="Center"
@@ -42,64 +44,6 @@
                     </StackPanel>
                 </materialDesign:Card>
             </DataTemplate>
-            <Style x:Key="ExitecButtonTemplate" TargetType="{x:Type Button}">
-                <Setter Property="FocusVisualStyle">
-                    <Setter.Value>
-                        <Style>
-                            <Setter Property="Control.Template">
-                                <Setter.Value>
-                                    <ControlTemplate>
-                                        <Ellipse Margin="2" SnapsToDevicePixels="True" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </Setter.Value>
-                </Setter>
-                <Setter Property="Background" Value="{DynamicResource PrimaryHueMidBrush}"/>
-                <Setter Property="BorderBrush" Value="{DynamicResource PrimaryHueMidBrush}"/>
-                <Setter Property="Foreground" Value="{DynamicResource PrimaryHueMidForegroundBrush}"/>
-                <Setter Property="Cursor" Value="Hand"/>
-                <Setter Property="materialDesign:ShadowAssist.ShadowDepth" Value="Depth1"/>
-                <Setter Property="FontWeight" Value="SemiBold"/>
-                <Setter Property="FontSize" Value="14"/>
-                <Setter Property="BorderThickness" Value="1"/>
-                <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                <Setter Property="VerticalContentAlignment" Value="Center"/>
-                <Setter Property="Padding" Value="16,4"/>
-                <Setter Property="Height" Value="32"/>
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type Button}">
-                            <Grid Height="{TemplateBinding Height}" Width="{TemplateBinding Height}"  Margin="18.307,0,26.307,0">
-                                <AdornerDecorator d:IsLocked="True">
-                                    <AdornerDecorator.CacheMode>
-                                        <BitmapCache EnableClearType="True" SnapsToDevicePixels="True"/>
-                                    </AdornerDecorator.CacheMode>
-                                    <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" CornerRadius="{TemplateBinding Height}" HorizontalAlignment="Stretch" Width="Auto" RenderTransformOrigin="1.051,0.531">
-                                        <Border.Effect>
-                                            <Binding Path="(materialDesign:ShadowAssist.ShadowDepth)" RelativeSource="{RelativeSource TemplatedParent}">
-                                                <Binding.Converter>
-                                                    <Converters:ShadowConverter/>
-                                                </Binding.Converter>
-                                            </Binding>
-                                        </Border.Effect>
-                                    </Border>
-                                </AdornerDecorator>
-                                <materialDesign:Ripple ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" Focusable="False" Feedback="White" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" RenderTransformOrigin="0.533,0.453" Margin="0" HorizontalAlignment="Stretch" Width="Auto"/>
-                            </Grid>
-                            <ControlTemplate.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="materialDesign:ShadowAssist.Darken" TargetName="border" Value="True"/>
-                                </Trigger>
-                                <Trigger Property="IsEnabled" Value="False">
-                                    <Setter Property="Opacity" Value="0.23"/>
-                                </Trigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
         </ResourceDictionary>
     </Window.Resources>
     <Window.FontFamily>
@@ -110,31 +54,56 @@
     </Window.DataContext>
     <Grid>
         <DockPanel>
-            <Grid MinWidth="300" DockPanel.Dock="Left">
-                <Image x:Name="___Emulator_component_01_01_png" Margin="-82,-23,-81,-68" Source="/Emulator;component/01-01.png" Stretch="Fill" HorizontalAlignment="Left" Width="465" Height="663" VerticalAlignment="Top"/>
-                <StackPanel Margin="105,241,122,0" Height="136" VerticalAlignment="Top">
-                    <Button x:Name="button" FontSize="8" Height="38" Width="38"  Style="{StaticResource RoundedButton}" d:IsLocked="True">
-                        <TextBlock>Mode</TextBlock>
-                    </Button>
-                    <Button x:Name="button_Copy" Content="Button"  Height="38" Width="38"  Style="{StaticResource RoundedButton}" FontSize="8" d:IsLocked="True" />
-                    <Button x:Name="button_Copy1" Height="38" Width="38"  Style="{StaticResource RoundedButton}" FontSize="8" d:IsLocked="True" >
-                        <StackPanel>
-                            <TextBlock>On</TextBlock>
-                            <TextBlock>Off</TextBlock>
-                        </StackPanel>
-                    </Button>
+            <Grid Width="302">
+                <Grid d:LayoutOverrides="Width">
+                    <Image x:Name="___Emulator_component_01_01_png" Margin="-81,-23,-82,-69" Source="/Emulator;component/01-01.png" Stretch="Fill" HorizontalAlignment="Left" Width="465" Height="663" VerticalAlignment="Top"/>
+                    <Grid Height="77" Margin="109,132,127,0" VerticalAlignment="Top">
+                        <TextBlock x:Name="textBlock" Margin="16.545,0,13.339,0" TextWrapping="Wrap" Text="28.6" VerticalAlignment="Bottom" FontFamily="Digital-7 Mono" FontSize="18.667" Height="19.025"/>
+                        <TextBlock x:Name="textBlock_Copy" Margin="4.667,29.724,5.339,0" TextWrapping="Wrap" FontFamily="Ticking Timebomb BB" FontSize="26.667" Height="26.834" VerticalAlignment="Top"><Run Text="28.60"/></TextBlock>
+                        <TextBlock x:Name="textBlock_Copy1" Margin="0,0,0,10" TextWrapping="Wrap" Text="°C" VerticalAlignment="Bottom" FontFamily="Digital-7 Mono" FontSize="9.333" Height="9.025" RenderTransformOrigin="1.119,0.093" HorizontalAlignment="Right" Width="12.007"/>
+                        <TextBlock x:Name="textBlock_Copy2" Margin="0,0,0.666,2.341" TextWrapping="Wrap" Text=" F" VerticalAlignment="Bottom" FontFamily="Digital-7 Mono" FontSize="9.333" Height="9.025" RenderTransformOrigin="1.119,0.093" HorizontalAlignment="Right" Width="12.007"/>
+                        <controls:ArcProgressBar Height="17.125" Margin="4,4.833,3.943,0" VerticalAlignment="Top" Style="{DynamicResource ArcProgressBarStyle}" MaxValueLabel="180" MinValueLabel="0"/>
+                    </Grid>
+                    <StackPanel Margin="106,241,121,0" Height="136" VerticalAlignment="Top">
+                        <Button x:Name="button" FontSize="8" Height="38" Width="38"  Style="{StaticResource RoundedButton}">
+                            <StackPanel>
+                                <TextBlock TextAlignment="Center" FontSize="10" FontWeight="DemiBold" ><Run Text="Mode"/></TextBlock>
+                                <TextBlock TextAlignment="Center" FontSize="10" FontWeight="DemiBold"><Run Text="Hold"/></TextBlock>
+                            </StackPanel>
+                        </Button>
+                        <Button x:Name="button_Copy"  Height="38" Width="38"  Style="{StaticResource RoundedButton}" FontSize="8" >
+                            <StackPanel>
+                                <TextBlock TextAlignment="Center" FontSize="10" FontWeight="DemiBold"><Run Text="Call"/></TextBlock>
+                                <TextBlock TextAlignment="Center" FontSize="10" FontWeight="DemiBold"><Run Text="Recall"/></TextBlock>
+                            </StackPanel>
+                        </Button>
+                        <Button x:Name="button_Copy1" Height="38" Width="Auto"  Style="{StaticResource RoundedButton}" FontSize="8" Margin="18.002,0,18.998,0" HorizontalAlignment="Stretch" >
+                            <StackPanel>
+                                <TextBlock FontSize="10" FontWeight="DemiBold" TextAlignment="Center"><Run Text="On"/></TextBlock>
+                                <TextBlock FontSize="10" FontWeight="DemiBold" TextAlignment="Center"><Run Text="Off"/></TextBlock>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+            <Grid MinWidth="320" DockPanel.Dock="Top" Margin="0,0,10,0">
+                <StackPanel Orientation="Vertical" d:LayoutOverrides="Height">
+                    <Grid Height="32" Margin="0,5.9,0,0">
+
+                        <Button x:Name="button1" Content="Reset" HorizontalAlignment="Right" Margin="0,0,10,0" Width="120"/>
+                        <ComboBox x:Name="comboBox" Margin="10,0,135,0" VerticalAlignment="Stretch"/>
+                    </Grid>
+                    <Grid Height="250">
+                        <Image Margin="5"  Source="../Images/1.jpg" Height="250" StretchDirection="UpOnly"/>
+                    </Grid>
                 </StackPanel>
-                <Grid Height="66.5" Margin="123,140,120.807,0" VerticalAlignment="Top"/>
             </Grid>
-            <Grid MinWidth="320" DockPanel.Dock="Top">
-                <Image Source="../Images/1.jpg" Height="250" StretchDirection="UpOnly"/>
-            </Grid>
-            <Grid MinWidth="320" DockPanel.Dock="Bottom" HorizontalAlignment="Center">
+            <Grid DockPanel.Dock="Bottom" HorizontalAlignment="Center" Margin="11,0,20,0">
                 <StackPanel HorizontalAlignment="Center">
-                    <ListView HorizontalAlignment="Center" ItemsSource="{Binding FilterModels}" Margin="0" AllowDrop="True" BorderBrush="{x:Null}" Foreground="Black" Background="{x:Null}" Focusable="False" Height="318" >
+                    <ListView HorizontalAlignment="Center" ItemsSource="{Binding FilterModels}" Margin="0" AllowDrop="True" BorderBrush="{x:Null}" Foreground="Black" Background="{x:Null}">
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel Margin="0,0,0,0" VerticalAlignment="Stretch" MinWidth="300" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                                <StackPanel Margin="0,0,0,0" VerticalAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Disabled">
                                     <ContentControl Content="{Binding .}" HorizontalAlignment="Stretch"/>
                                 </StackPanel>
                             </DataTemplate>

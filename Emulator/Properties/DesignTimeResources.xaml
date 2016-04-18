@@ -1,5 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Emulator.Properties">
-    
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Emulator.Design;component/Theme.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
 </ResourceDictionary>
