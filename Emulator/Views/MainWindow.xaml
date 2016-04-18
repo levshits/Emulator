@@ -49,7 +49,7 @@
                             <Setter Property="Control.Template">
                                 <Setter.Value>
                                     <ControlTemplate>
-                                        <Rectangle Margin="2" SnapsToDevicePixels="True" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                                        <Ellipse Margin="2" SnapsToDevicePixels="True" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
                                     </ControlTemplate>
                                 </Setter.Value>
                             </Setter>
@@ -71,12 +71,12 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type Button}">
-                            <Grid Width="32" Margin="18.307,0,26.307,0" Height="32">
+                            <Grid Height="{TemplateBinding Height}" Width="{TemplateBinding Height}"  Margin="18.307,0,26.307,0">
                                 <AdornerDecorator d:IsLocked="True">
                                     <AdornerDecorator.CacheMode>
                                         <BitmapCache EnableClearType="True" SnapsToDevicePixels="True"/>
                                     </AdornerDecorator.CacheMode>
-                                    <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" CornerRadius="16" HorizontalAlignment="Stretch" Width="Auto" RenderTransformOrigin="1.051,0.531">
+                                    <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" CornerRadius="{TemplateBinding Height}" HorizontalAlignment="Stretch" Width="Auto" RenderTransformOrigin="1.051,0.531">
                                         <Border.Effect>
                                             <Binding Path="(materialDesign:ShadowAssist.ShadowDepth)" RelativeSource="{RelativeSource TemplatedParent}">
                                                 <Binding.Converter>
@@ -111,12 +111,19 @@
     <Grid>
         <DockPanel>
             <Grid MinWidth="300" DockPanel.Dock="Left">
-                <Image x:Name="___Emulator_component_01_01_png" Margin="-37.363,10,-54.892,0" Source="/Emulator;component/01-01.png" Stretch="Fill" HorizontalAlignment="Left" Width="394.062"/>
-                <Grid Margin="118.5,228.833,106.693,226">
-                    <Button x:Name="button" Content="Button" VerticalAlignment="Top" RenderTransformOrigin="0,0.188" Style="{DynamicResource ExitecButtonTemplate}" FontSize="8" HorizontalAlignment="Left" Width="76.614" Margin="0,4.668,0,0"/>
-                    <Button x:Name="button_Copy" Content="Button" RenderTransformOrigin="0,0.188" Style="{DynamicResource ExitecButtonTemplate}" VerticalAlignment="Bottom" FontSize="8" HorizontalAlignment="Left" Width="76.614" Margin="0,0,0,15.34"/>
-                    <Button x:Name="button_Copy1" Content="Button" Margin="0,36.497,0,47.669" RenderTransformOrigin="0,0.188" Style="{DynamicResource ExitecButtonTemplate}" FontSize="8"/>
-                </Grid>
+                <Image x:Name="___Emulator_component_01_01_png" Margin="-82,-23,-81,-68" Source="/Emulator;component/01-01.png" Stretch="Fill" HorizontalAlignment="Left" Width="465" Height="663" VerticalAlignment="Top"/>
+                <StackPanel Margin="105,241,122,0" Height="136" VerticalAlignment="Top">
+                    <Button x:Name="button" FontSize="8" Height="38" Width="38"  Style="{StaticResource RoundedButton}" d:IsLocked="True">
+                        <TextBlock>Mode</TextBlock>
+                    </Button>
+                    <Button x:Name="button_Copy" Content="Button"  Height="38" Width="38"  Style="{StaticResource RoundedButton}" FontSize="8" d:IsLocked="True" />
+                    <Button x:Name="button_Copy1" Height="38" Width="38"  Style="{StaticResource RoundedButton}" FontSize="8" d:IsLocked="True" >
+                        <StackPanel>
+                            <TextBlock>On</TextBlock>
+                            <TextBlock>Off</TextBlock>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
                 <Grid Height="66.5" Margin="123,140,120.807,0" VerticalAlignment="Top"/>
             </Grid>
             <Grid MinWidth="320" DockPanel.Dock="Top">
