@@ -4,6 +4,7 @@
   <!--ResetCommand-->
   <object id="ResetCommand" type="Emulator.Logic.ResetCommand, Emulator">
     <property name="DataProvider" ref="IDataProvider" />
+    <property name="ViewModel" ref="MainViewModel" />
   </object>
 
   <!--ExitecModeButtonCommand-->
@@ -20,4 +21,9 @@
   <object id="ExitecCallRecallButtonCommand" type="Emulator.Logic.ExitecCallRecallButtonCommand, Emulator">
     <property name="ExitecDeviceViewModel" ref="ExitecDeviceViewModel" />
   </object>
+
+<!--ApplyFilterCommand-->
+<object id="ApplyFilterCommand" type="Emulator.Logic.ApplyFilterCommand, Emulator">
+  
+</object>
 </objects>

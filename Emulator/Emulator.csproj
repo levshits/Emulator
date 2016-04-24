@@ -121,12 +121,13 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Logic\ApplyFilterCommand.cs" />
     <Compile Include="Logic\CommandWithDelay.cs" />
     <Compile Include="Logic\ExitecCallRecallButtonCommand.cs" />
     <Compile Include="Logic\ExitecModeHoldButtonCommand.cs" />
     <Compile Include="Logic\ExitecOnOffButtonCommand.cs" />
     <Compile Include="Logic\ResetCommand.cs" />
-    <Compile Include="Model\FilterModel.cs" />
+    <Compile Include="Model\HannaScaleMode.cs" />
     <Compile Include="Model\ModelBase.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="ViewModel\ExitecDeviceViewModel.cs" />
@@ -144,6 +145,9 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Content Include="Config\Data.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="packages.config" />
     <AppDesigner Include="Properties\" />
   </ItemGroup>

@@ -1,17 +1,10 @@
 ﻿using System;
 using System.Windows.Input;
-using Common.Logging;
-using Emulator.Common.Interfaces;
-using Emulator.ViewModel;
 
 namespace Emulator.Logic
 {
-    public class ResetCommand: ICommand
+    public class ApplyFilterCommand : ICommand
     {
-        private static readonly ILog Log = LogManager.GetLogger(typeof(ResetCommand));
-        public MainViewModel ViewModel { get; set; }
-        public IDataProvider DataProvider { get; set; }
-
         public bool CanExecute(object parameter)
         {
             return true;
@@ -19,7 +12,7 @@ namespace Emulator.Logic
 
         public void Execute(object parameter)
         {
-            DataProvider.Reset(ViewModel.Variant);
+            
         }
 
         public event EventHandler CanExecuteChanged

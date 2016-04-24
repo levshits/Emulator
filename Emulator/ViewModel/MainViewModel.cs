@@ -51,6 +51,7 @@ namespace Emulator.ViewModel
         }
 
         public ICommand ResetCommand { get; set; }
+        public ICommand ApplyFilterCommand { get; set; }
 
         public MainViewModel()
         {
@@ -59,17 +60,13 @@ namespace Emulator.ViewModel
         public MainViewModel(IDataProvider dataProvider)
         {
             _dataProvider = dataProvider;
-            FilterModels = new List<FilterModel>()
-            {
-                new FilterModel() {Description = "Description 1", FilterName = "Filter1"},
-                new FilterModel() {Description = "Description 2", FilterName = "Filter2"},
-            };
         }
 
         public void OnInit()
         {
             SetDeviceModel();
             Variants = _dataProvider.GetVariants();
+            FilterModels = _dataProvider.GetFilters();
         }
 
         private void SetDeviceModel()

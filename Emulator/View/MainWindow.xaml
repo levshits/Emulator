@@ -11,6 +11,7 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:command="http://www.galasoft.ch/mvvmlight"
         xmlns:viewModel="clr-namespace:Emulator.ViewModel"
+        xmlns:common="clr-namespace:Emulator.Common.Models;assembly=Emulator.Common"
         x:Class="Emulator.Views.MainWindow"
         mc:Ignorable="d"
         Title="Water emulation" Height="600" Width="650"
@@ -31,19 +32,27 @@
                 <ResourceDictionary
                     Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ToggleButton.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            <DataTemplate  DataType="{x:Type models:FilterModel}">
-                <materialDesign:Card UseLayoutRounding="True" Margin="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                    <StackPanel Orientation="Horizontal">
-                        <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" 
+            <DataTemplate x:Key="FilterTemplate"  DataType="{x:Type common:FilterModel}">
+                <materialDesign:Card UseLayoutRounding="True" Margin="1">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="60"/>
+                            <ColumnDefinition Width="*">
+                            </ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" 
                         HorizontalAlignment="Left" VerticalAlignment="Center"
-                        Margin="20 15 10 15">
+                                Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}, Path=DataContext.ApplyFilterCommand}" CommandParameter="{Binding .}"
+                        Margin="10 15 10 15">
                             <materialDesign:PackIcon Kind="PlusOne" />
                         </Button>
-                        <StackPanel Margin="8 24 8 10" >
-                            <TextBlock FontWeight="Bold" Text="{Binding FilterName}"/>
-                            <TextBlock TextWrapping="Wrap" Text="{Binding Description}" VerticalAlignment="Center"/>
-                        </StackPanel>
-                    </StackPanel>
+                        <Grid Grid.Column="1">
+                            <StackPanel Margin="8 24 8 10">
+                                <TextBlock Margin="5" TextWrapping="Wrap" FontWeight="Bold" Text="{Binding FilterName}"/>
+                                <TextBlock Margin="5" Width="Auto" TextWrapping="Wrap" Text="{Binding Description}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
                 </materialDesign:Card>
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewModel:ExitecDeviceViewModel}">
@@ -116,13 +125,13 @@
                         <TextBlock TextAlignment="Right" HorizontalAlignment="Right" Margin="0,0,8.279,3.667" TextWrapping="Wrap" Text="°C" Visibility="{Binding CelsiusIndicatorVisibility}" FontFamily="Ticking Timebomb BB" FontSize="13.333" Width="13.054" Height="13.5" VerticalAlignment="Bottom" RenderTransformOrigin="0.817,1.358"/>
                         <StackPanel Orientation="Horizontal" Height="22" VerticalAlignment="Top">
                             <TextBlock TextAlignment="Right" HorizontalAlignment="Left" Margin="10,8,0,0" TextWrapping="Wrap" Text="ATC" FontFamily="Ticking Timebomb BB" FontSize="9.333" Width="13.054" Height="7.167" VerticalAlignment="Top" RenderTransformOrigin="0.817,1.358"/>
-                            <TextBlock TextAlignment="Right" HorizontalAlignment="Right" Margin="10,8,0,0" TextWrapping="Wrap" Text="ppm" FontFamily="Ticking Timebomb BB" FontSize="9.333" Width="13" Height="14" VerticalAlignment="Top" RenderTransformOrigin="0.817,1.358"/>
-                            <TextBlock TextAlignment="Right" Margin="6,8,0,0" TextWrapping="Wrap" Text="ppt" FontFamily="Ticking Timebomb BB" FontSize="9.333" Width="Auto" Height="14" VerticalAlignment="Top" RenderTransformOrigin="0.817,1.358"/>
-                            <TextBlock TextAlignment="Right" HorizontalAlignment="Right" Margin="6,8,0,0" TextWrapping="Wrap" Text="mS/cm" FontFamily="Ticking Timebomb BB" FontSize="9.333" Width="Auto" Height="14" VerticalAlignment="Top" RenderTransformOrigin="0.817,1.358"/>
-                            <TextBlock TextAlignment="Right" HorizontalAlignment="Right" Margin="6,8,0,0" TextWrapping="Wrap" Text="pH" FontFamily="Ticking Timebomb BB" FontSize="9.333" Width="Auto" Height="13.5" VerticalAlignment="Top" RenderTransformOrigin="0.817,1.358"/>
+                            <TextBlock TextAlignment="Right" HorizontalAlignment="Right" Margin="10,8,0,0" TextWrapping="Wrap" Text="ppm" Visibility="{Binding PpmIndicatorVisibility}" FontFamily="Ticking Timebomb BB" FontSize="9.333" Width="13" Height="14" VerticalAlignment="Top" RenderTransformOrigin="0.817,1.358"/>
+                            <TextBlock TextAlignment="Right" Margin="6,8,0,0" TextWrapping="Wrap" Text="ppt" FontFamily="Ticking Timebomb BB" Visibility="{Binding PptIndicatorVisibility}" FontSize="9.333" Width="Auto" Height="14" VerticalAlignment="Top" RenderTransformOrigin="0.817,1.358"/>
+                            <TextBlock TextAlignment="Right" HorizontalAlignment="Right" Margin="6,8,0,0" TextWrapping="Wrap" Text="mS/cm" Visibility="{Binding MscmIndicatorVisibility}" FontFamily="Ticking Timebomb BB" FontSize="9.333" Width="Auto" Height="14" VerticalAlignment="Top" RenderTransformOrigin="0.817,1.358"/>
+                            <TextBlock TextAlignment="Right" HorizontalAlignment="Right" Margin="6,8,0,0" TextWrapping="Wrap" Text="pH" Visibility="{Binding PhIndicatorVisibility}" FontFamily="Ticking Timebomb BB" FontSize="9.333" Width="Auto" Height="13.5" VerticalAlignment="Top" RenderTransformOrigin="0.817,1.358"/>
 
                         </StackPanel>
-                                               <TextBlock TextAlignment="Right" HorizontalAlignment="Left" Margin="1.5,0,0,13" TextWrapping="Wrap" Text="Cal" FontFamily="Ticking Timebomb BB" FontSize="9.333" Width="16.054" Height="8.834" VerticalAlignment="Bottom" RenderTransformOrigin="0.817,1.358"/>
+                        <TextBlock TextAlignment="Right" HorizontalAlignment="Left" Margin="1.5,0,0,13" TextWrapping="Wrap" Text="Cal" FontFamily="Ticking Timebomb BB" FontSize="9.333" Width="16.054" Height="8.834" VerticalAlignment="Bottom" RenderTransformOrigin="0.817,1.358"/>
                         <TextBlock TextAlignment="Right" HorizontalAlignment="Left" Margin="6.004,0,0,30.667" TextWrapping="Wrap" Text="%" FontFamily="Ticking Timebomb BB" FontSize="9.333" Width="10.054" Height="9.667" VerticalAlignment="Bottom" RenderTransformOrigin="0.817,1.358"/>
                     </Grid>
                     <StackPanel Height="33" Margin="114,206.446,109,0" Orientation="Horizontal" VerticalAlignment="Top" d:LayoutOverrides="Width">
@@ -177,15 +186,15 @@
             </Grid>
             <Grid DockPanel.Dock="Bottom" HorizontalAlignment="Center" Margin="11,0,20,0" >
                 <StackPanel HorizontalAlignment="Center">
-                    <ListView HorizontalAlignment="Center" ItemsSource="{Binding FilterModels}" Margin="0" AllowDrop="True" BorderBrush="{x:Null}" Foreground="Black" Background="{x:Null}">
-                        <ListView.ItemTemplate>
+                    <ItemsControl  Focusable="False" HorizontalContentAlignment="Stretch" ItemsSource="{Binding FilterModels}" Margin="0" AllowDrop="True" Foreground="Black" HorizontalAlignment="Stretch">
+                        <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel Margin="0,0,0,0" VerticalAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Disabled">
-                                    <ContentControl Content="{Binding .}" HorizontalAlignment="Stretch"/>
+                                <StackPanel Margin="0,0,0,0">
+                                    <ContentControl Content="{Binding .}" HorizontalAlignment="Stretch" ContentTemplate="{DynamicResource FilterTemplate}"/>
                                 </StackPanel>
                             </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
                 </StackPanel>
             </Grid>
 

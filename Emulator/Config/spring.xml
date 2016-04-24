@@ -6,6 +6,7 @@
   <object id="MainViewModel" type="Emulator.ViewModel.MainViewModel, Emulator" singleton="true" init-method="OnInit">
     <constructor-arg name="dataProvider" ref="IDataProvider"/>
     <property name="ResetCommand" ref="ResetCommand"/>
+    <property name="ApplyFilterCommand" ref="ApplyFilterCommand"/>
     <property name="ExitecDeviceViewModel" ref="ExitecDeviceViewModel"/>
     <property name="HannaDeviceViewModel" ref="HannaDeviceViewModel"/>
   </object>

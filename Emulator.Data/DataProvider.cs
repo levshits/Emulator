@@ -6,7 +6,8 @@ namespace Emulator.Data
 {
     public class DataProvider: IDataProvider
     {
-        public void Reset()
+        private const string DATA_FILE = @"~/Config/Data.xls"; 
+        public void Reset(VariantModel variant)
         {
             throw new System.NotImplementedException();
         }
@@ -14,6 +15,16 @@ namespace Emulator.Data
         public List<VariantModel> GetVariants()
         {
             throw new System.NotImplementedException();
+        }
+
+        public List<FilterModel> GetFilters()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void OnInit()
+        {
+            
         }
     }
 }
