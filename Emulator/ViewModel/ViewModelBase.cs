@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using Emulator.Annotations;
+using Emulator.Properties;
 
-namespace Emulator.ViewModels
+namespace Emulator.ViewModel
 {
     public class ViewModelBase : INotifyPropertyChanged
     {

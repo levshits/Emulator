@@ -6,10 +6,12 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:Emulator"
         xmlns:models="clr-namespace:Emulator.Models"
-        xmlns:viewModels="clr-namespace:Emulator.ViewModels"
-        xmlns:Converters="clr-namespace:MaterialDesignThemes.Wpf.Converters;assembly=MaterialDesignThemes.Wpf"
+    xmlns:Converters="clr-namespace:MaterialDesignThemes.Wpf.Converters;assembly=MaterialDesignThemes.Wpf"
         xmlns:controls="clr-namespace:Emulator.Design.Controls;assembly=Emulator.Design"
-        x:Class="Emulator.MainWindow"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:command="http://www.galasoft.ch/mvvmlight"
+        xmlns:viewModel="clr-namespace:Emulator.ViewModel"
+        x:Class="Emulator.Views.MainWindow"
         mc:Ignorable="d"
         Title="Water emulation" Height="600" Width="650"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -87,7 +89,7 @@
         <StaticResource ResourceKey="MaterialDesignFont"/>
     </Window.FontFamily>
     <Window.DataContext>
-        <viewModels:MainViewModel/>
+        <viewModel:MainViewModel/>
     </Window.DataContext>
     <Grid>
         <DockPanel>
@@ -103,7 +105,7 @@
                 <StackPanel Orientation="Vertical" d:LayoutOverrides="Height">
                     <Grid Height="32" Margin="0,6,0,0">
 
-                        <Button x:Name="button1" Content="Reset" HorizontalAlignment="Right" Margin="0,0,10,0" Width="120"/>
+                        <Button x:Name="button1" Content="Reset" HorizontalAlignment="Right" Margin="0,0,10,0" Width="120" Command="{Binding ResetCommand}"/>
                         <ComboBox x:Name="comboBox" Margin="10,0,135,0" VerticalAlignment="Stretch"/>
                     </Grid>
                     <Grid Height="250">

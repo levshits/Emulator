@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using Emulator.Annotations;
+using Emulator.Properties;
 
 namespace Emulator.Models
 {
