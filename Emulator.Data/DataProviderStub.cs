@@ -22,8 +22,8 @@ namespace Emulator.Data
         {
             return new List<FilterModel>()
             {
-                new FilterModel() {Description = "Description 1", FilterName = "Filter1"},
-                new FilterModel() {Description = "Description 2 Description 2 Description 2 Description 2", FilterName = "Filter2"},
+                new FilterModel() {Description = "Description 1", Name = "Filter1"},
+                new FilterModel() {Description = "Description 2 Description 2 Description 2 Description 2", Name = "Filter2"},
             };
         }
 

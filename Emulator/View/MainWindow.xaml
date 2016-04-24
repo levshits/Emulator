@@ -48,7 +48,7 @@
                         </Button>
                         <Grid Grid.Column="1">
                             <StackPanel Margin="8 24 8 10">
-                                <TextBlock Margin="5" TextWrapping="Wrap" FontWeight="Bold" Text="{Binding FilterName}"/>
+                                <TextBlock Margin="5" TextWrapping="Wrap" FontWeight="Bold" Text="{Binding Name}"/>
                                 <TextBlock Margin="5" Width="Auto" TextWrapping="Wrap" Text="{Binding Description}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
                             </StackPanel>
                         </Grid>
