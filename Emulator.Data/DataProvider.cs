@@ -38,6 +38,7 @@ namespace Emulator.Data
             IWorkbook wb = null;
             try
             {
+                Log.Debug("Initialization started");
                 using (FileStream file = new FileStream(DATA_FILE, FileMode.Open, FileAccess.Read))
                 {
                     wb = new HSSFWorkbook(file);
@@ -47,7 +48,7 @@ namespace Emulator.Data
             }
             catch (Exception e)
             {
-                Log.Error("Initialisation exception", e);
+                Log.Error("Initialization exception", e);
                 throw;
             }
         }
