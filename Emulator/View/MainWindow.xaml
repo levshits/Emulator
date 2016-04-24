@@ -104,9 +104,11 @@
             <Grid MinWidth="320" DockPanel.Dock="Top" Margin="0,0,10,0">
                 <StackPanel Orientation="Vertical" d:LayoutOverrides="Height">
                     <Grid Height="32" Margin="0,6,0,0">
-
-                        <Button x:Name="button1" Content="Reset" HorizontalAlignment="Right" Margin="0,0,10,0" Width="120" Command="{Binding ResetCommand}"/>
-                        <ComboBox x:Name="comboBox" Margin="10,0,135,0" VerticalAlignment="Stretch"/>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Width="66" Text="Вариант" VerticalAlignment="Center" TextAlignment="Center"></TextBlock>
+                            <ComboBox x:Name="comboBox" Margin="0" VerticalAlignment="Stretch" Width="144"/>
+                            <Button x:Name="button1" Content="Reset" HorizontalAlignment="Right" Width="120" Command="{Binding ResetCommand}"/>
+                        </StackPanel>
                     </Grid>
                     <Grid Height="250">
                         <Image Margin="5"  Source="../Images/1.jpg" Height="250" StretchDirection="UpOnly"/>

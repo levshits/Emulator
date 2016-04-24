@@ -19,7 +19,6 @@ namespace Emulator.ViewModel
                 new FilterModel() {Description = "Description 1", FilterName = "Filter1"},
                 new FilterModel() {Description = "Description 2", FilterName = "Filter2"},
             };
-            ResetCommand = new ResetCommand();
         }
     }
 }

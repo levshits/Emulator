@@ -168,6 +168,12 @@
   <ItemGroup>
     <Resource Include="01-01.png" />
     <Resource Include="Image1.png" />
+    <Content Include="Config\Data.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Config\Command.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Config\spring.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
