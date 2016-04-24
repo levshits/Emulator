@@ -83,8 +83,6 @@ namespace Emulator.ViewModel
 
         public ExitecDeviceViewModel()
         {
-            BigScreenText = "Init";
-            LittleScreenText = "Cal";
         }
 
         public decimal HistogramMinValue

@@ -16,6 +16,6 @@
     <property name="ExitecOnOffButtonCommand" ref="ExitecOnOffButtonCommand"/>
   </object>
 
-  <object id="HannaDeviceViewModel" type="Emulator.ViewModel.HannaDeviceViewModel, Emulator" singleton="true">
+  <object id="HannaDeviceViewModel" type="Emulator.ViewModel.HannaDeviceViewModel, Emulator" singleton="true" init-method="OnInit">
   </object>
 </objects>

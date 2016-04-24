@@ -181,6 +181,8 @@
     <Content Include="Config\spring.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Image2.png" />
+    <Resource Include="Image3.png" />
     <Content Include="Images\1.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

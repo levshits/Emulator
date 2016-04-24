@@ -106,24 +106,28 @@
                     </Grid>
                 </Grid>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type viewModel:HannaDeviceViewModel}">
+            <DataTemplate x:Key="DeviceViewTemplate" DataType="{x:Type viewModel:HannaDeviceViewModel}">
                 <Grid>
                     <Image x:Name="___Emulator_component_21_01_png" Margin="-133.545,-27,-137,199.058" Source="/Emulator;component/21-01.png" Stretch="Fill"/>
                     <Grid Height="82.5" Margin="98,88.446,93,0" VerticalAlignment="Top">
-                        <Image x:Name="___Emulator_component_Image2_png" Margin="0" Source="/Emulator;component/Image2.png" Stretch="Fill" d:IsHidden="True"/>
-                        <TextBlock x:Name="textBlock" TextAlignment="Right" HorizontalAlignment="Stretch" Margin="29.28,19.333,10,30.667" TextWrapping="Wrap" Text="TextBlock" FontFamily="Ticking Timebomb BB" FontSize="40" Width="Auto" d:LayoutOverrides="Width" d:IsLocked="True"/>
-                        <TextBlock x:Name="textBlock_Copy" TextAlignment="Right" HorizontalAlignment="Stretch" Margin="29.28,0,21.333,3.667" TextWrapping="Wrap" Text="TextBlock" FontFamily="Ticking Timebomb BB" FontSize="26.667" Width="Auto" Height="27" VerticalAlignment="Bottom"/>
-                        <TextBlock x:Name="textBlock_Copy1" TextAlignment="Right" HorizontalAlignment="Right" Margin="0,0,8.279,15.834" TextWrapping="Wrap" Text="°F" FontFamily="Ticking Timebomb BB" FontSize="13.333" Width="13.054" Height="13.5" VerticalAlignment="Bottom" RenderTransformOrigin="0.817,1.358"/>
-                        <TextBlock x:Name="textBlock_Copy2" TextAlignment="Right" HorizontalAlignment="Right" Margin="0,0,8.279,3.667" TextWrapping="Wrap" Text="°C" FontFamily="Ticking Timebomb BB" FontSize="13.333" Width="13.054" Height="13.5" VerticalAlignment="Bottom" RenderTransformOrigin="0.817,1.358"/>
-                        <TextBlock x:Name="textBlock_Copy3" TextAlignment="Right" HorizontalAlignment="Stretch" Margin="44.001,9.333,53.945,0" TextWrapping="Wrap" Text="mV" FontFamily="Ticking Timebomb BB" FontSize="9.333" Width="Auto" Height="13.5" VerticalAlignment="Top" RenderTransformOrigin="0.817,1.358"/>
-                        <TextBlock x:Name="textBlock_Copy4" TextAlignment="Right" HorizontalAlignment="Right" Margin="0,9.333,8.279,0" TextWrapping="Wrap" Text="pH" FontFamily="Ticking Timebomb BB" FontSize="9.333" Width="13.054" Height="13.5" VerticalAlignment="Top" RenderTransformOrigin="0.817,1.358"/>
-                        <TextBlock x:Name="textBlock_Copy5" TextAlignment="Right" HorizontalAlignment="Left" Margin="10,9.333,0,0" TextWrapping="Wrap" Text="ATC" FontFamily="Ticking Timebomb BB" FontSize="9.333" Width="13.054" Height="7.167" VerticalAlignment="Top" RenderTransformOrigin="0.817,1.358"/>
-                        <TextBlock x:Name="textBlock_Copy6" TextAlignment="Right" HorizontalAlignment="Left" Margin="1.5,0,0,13" TextWrapping="Wrap" Text="Cal" FontFamily="Ticking Timebomb BB" FontSize="9.333" Width="16.054" Height="8.834" VerticalAlignment="Bottom" RenderTransformOrigin="0.817,1.358"/>
-                        <TextBlock x:Name="textBlock_Copy7" TextAlignment="Right" HorizontalAlignment="Left" Margin="6.004,0,0,30.667" TextWrapping="Wrap" Text="%" FontFamily="Ticking Timebomb BB" FontSize="9.333" Width="10.054" Height="9.667" VerticalAlignment="Bottom" RenderTransformOrigin="0.817,1.358"/>
+                        <TextBlock TextAlignment="Right" HorizontalAlignment="Right" Margin="29.28,19.333,10,30.667" TextWrapping="Wrap" Text="{Binding BigScreenText}" FontFamily="Ticking Timebomb BB" FontSize="40" Width="Auto" d:LayoutOverrides="Width" d:IsLocked="True"/>
+                        <TextBlock TextAlignment="Right" HorizontalAlignment="Right" Margin="29.28,0,21.333,3.667" TextWrapping="Wrap" Text="{Binding LittleScreenText}" FontFamily="Ticking Timebomb BB" FontSize="26.667" Width="Auto" Height="27" VerticalAlignment="Bottom"/>
+                        <TextBlock TextAlignment="Right" HorizontalAlignment="Right" Margin="0,0,8.279,15.834" TextWrapping="Wrap" Text="°F" Visibility="{Binding FahrengeitIndicatorVisibility}" FontFamily="Ticking Timebomb BB" FontSize="13.333" Width="13.054" Height="13.5" VerticalAlignment="Bottom" RenderTransformOrigin="0.817,1.358"/>
+                        <TextBlock TextAlignment="Right" HorizontalAlignment="Right" Margin="0,0,8.279,3.667" TextWrapping="Wrap" Text="°C" Visibility="{Binding CelsiusIndicatorVisibility}" FontFamily="Ticking Timebomb BB" FontSize="13.333" Width="13.054" Height="13.5" VerticalAlignment="Bottom" RenderTransformOrigin="0.817,1.358"/>
+                        <StackPanel Orientation="Horizontal" Height="22" VerticalAlignment="Top">
+                            <TextBlock TextAlignment="Right" HorizontalAlignment="Left" Margin="10,8,0,0" TextWrapping="Wrap" Text="ATC" FontFamily="Ticking Timebomb BB" FontSize="9.333" Width="13.054" Height="7.167" VerticalAlignment="Top" RenderTransformOrigin="0.817,1.358"/>
+                            <TextBlock TextAlignment="Right" HorizontalAlignment="Right" Margin="10,8,0,0" TextWrapping="Wrap" Text="ppm" FontFamily="Ticking Timebomb BB" FontSize="9.333" Width="13" Height="14" VerticalAlignment="Top" RenderTransformOrigin="0.817,1.358"/>
+                            <TextBlock TextAlignment="Right" Margin="6,8,0,0" TextWrapping="Wrap" Text="ppt" FontFamily="Ticking Timebomb BB" FontSize="9.333" Width="Auto" Height="14" VerticalAlignment="Top" RenderTransformOrigin="0.817,1.358"/>
+                            <TextBlock TextAlignment="Right" HorizontalAlignment="Right" Margin="6,8,0,0" TextWrapping="Wrap" Text="mS/cm" FontFamily="Ticking Timebomb BB" FontSize="9.333" Width="Auto" Height="14" VerticalAlignment="Top" RenderTransformOrigin="0.817,1.358"/>
+                            <TextBlock TextAlignment="Right" HorizontalAlignment="Right" Margin="6,8,0,0" TextWrapping="Wrap" Text="pH" FontFamily="Ticking Timebomb BB" FontSize="9.333" Width="Auto" Height="13.5" VerticalAlignment="Top" RenderTransformOrigin="0.817,1.358"/>
+
+                        </StackPanel>
+                                               <TextBlock TextAlignment="Right" HorizontalAlignment="Left" Margin="1.5,0,0,13" TextWrapping="Wrap" Text="Cal" FontFamily="Ticking Timebomb BB" FontSize="9.333" Width="16.054" Height="8.834" VerticalAlignment="Bottom" RenderTransformOrigin="0.817,1.358"/>
+                        <TextBlock TextAlignment="Right" HorizontalAlignment="Left" Margin="6.004,0,0,30.667" TextWrapping="Wrap" Text="%" FontFamily="Ticking Timebomb BB" FontSize="9.333" Width="10.054" Height="9.667" VerticalAlignment="Bottom" RenderTransformOrigin="0.817,1.358"/>
                     </Grid>
                     <StackPanel Height="33" Margin="114,206.446,109,0" Orientation="Horizontal" VerticalAlignment="Top" d:LayoutOverrides="Width">
-                        <Button x:Name="button" Content="" Margin="0,0,7,0" VerticalAlignment="Stretch" Style="{DynamicResource RoundedButton}" HorizontalAlignment="Stretch" Height="Auto" Width="32.5"/>
-                        <Button x:Name="button_Copy" Content="" Margin="7,0.5,0,0" VerticalAlignment="Stretch" Style="{DynamicResource RoundedButton}" HorizontalAlignment="Stretch" Height="Auto" Width="32.5"/>
+                        <Button Content="" Margin="0,0,7,0" VerticalAlignment="Stretch" Style="{DynamicResource RoundedButton}" HorizontalAlignment="Stretch" Height="Auto" Width="32.5"/>
+                        <Button Content="" Margin="7,0.5,0,0" VerticalAlignment="Stretch" Style="{DynamicResource RoundedButton}" HorizontalAlignment="Stretch" Height="Auto" Width="32.5"/>
 
                     </StackPanel>
 
