@@ -3,7 +3,19 @@
   <import resource="command.xml" />
   <import resource="data.xml"/>
 
-  <object id="MainViewModel" type="Emulator.ViewModel.MainViewModel, Emulator" singleton="true">
+  <object id="MainViewModel" type="Emulator.ViewModel.MainViewModel, Emulator" singleton="true" init-method="OnInit">
+    <constructor-arg name="dataProvider" ref="IDataProvider"/>
     <property name="ResetCommand" ref="ResetCommand"/>
+    <property name="ExitecDeviceViewModel" ref="ExitecDeviceViewModel"/>
+    <property name="HannaDeviceViewModel" ref="HannaDeviceViewModel"/>
+  </object>
+  
+  <object id="ExitecDeviceViewModel" type="Emulator.ViewModel.ExitecDeviceViewModel, Emulator" singleton="true" init-method="OnInit">
+    <property name="ExitecModeHoldButtonCommand" ref="ExitecModeHoldButtonCommand"/>
+    <property name="ExitecCallRecallButtonCommand" ref="ExitecCallRecallButtonCommand"/>
+    <property name="ExitecOnOffButtonCommand" ref="ExitecOnOffButtonCommand"/>
+  </object>
+
+  <object id="HannaDeviceViewModel" type="Emulator.ViewModel.HannaDeviceViewModel, Emulator" singleton="true">
   </object>
 </objects>

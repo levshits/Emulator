@@ -31,7 +31,7 @@
                 <ResourceDictionary
                     Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ToggleButton.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            <DataTemplate DataType="{x:Type models:FilterModel}">
+            <DataTemplate  DataType="{x:Type models:FilterModel}">
                 <materialDesign:Card UseLayoutRounding="True" Margin="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                     <StackPanel Orientation="Horizontal">
                         <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" 
@@ -46,19 +46,18 @@
                     </StackPanel>
                 </materialDesign:Card>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type models:ExitecModel}">
-
-            </DataTemplate>
-            <DataTemplate x:Key="ExitechViewTemplate">
+            <DataTemplate DataType="{x:Type viewModel:ExitecDeviceViewModel}">
                 <Grid>
                     <Grid Margin="-135,-68,-157.05,134">
                         <Image x:Name="___Emulator_component_01_01_png" Margin="0,10,0,-10" Source="/Emulator;component/01-01.png" Stretch="Fill" HorizontalAlignment="Stretch" Width="Auto" Height="Auto" VerticalAlignment="Stretch"/>
-                        <Grid Height="97" Margin="243,199,267.05,0" VerticalAlignment="Top" HorizontalAlignment="Stretch" Width="Auto">
-                            <TextBlock x:Name="textBlock" Margin="29.884,0,0,-8.659" TextWrapping="Wrap" Text="28.6" VerticalAlignment="Bottom" FontFamily="Digital-7 Mono" FontSize="18.667" Height="19.025"/>
-                            <TextBlock x:Name="textBlock_Copy" Margin="15.667,0,-5.661,12.442" TextWrapping="Wrap" FontFamily="Ticking Timebomb BB" FontSize="26.667" Height="29.6" VerticalAlignment="Bottom"><Run Text="28.60"/></TextBlock>
-                            <TextBlock x:Name="textBlock_Copy1" Margin="0,80.975,0,1.322" TextWrapping="Wrap" Text="°C" VerticalAlignment="Stretch" FontFamily="Digital-7 Mono" FontSize="9.333" Height="Auto" RenderTransformOrigin="1.119,0.093" HorizontalAlignment="Right" Width="12.007"/>
-                            <TextBlock x:Name="textBlock_Copy2" Margin="0,80.921,0.5,1.376" TextWrapping="Wrap" Text=" F" VerticalAlignment="Stretch" FontFamily="Digital-7 Mono" FontSize="9.333" Height="Auto" RenderTransformOrigin="1.119,0.093" HorizontalAlignment="Right" Width="12.007"/>
-                            <controls:ArcProgressBar Height="Auto" Margin="2.943,10.171,5,49.704" VerticalAlignment="Stretch" Style="{DynamicResource ArcProgressBarStyle}" MaxValueLabel="180" MinValueLabel="0"/>
+                        <Grid Visibility="{Binding DeviceScreenVisibility}" Height="97" Margin="243,199,267.05,0" VerticalAlignment="Top" HorizontalAlignment="Stretch" Width="Auto">
+                            <TextBlock x:Name="bigScreen" Margin="15.667,0,10,12.442" TextWrapping="Wrap" FontFamily="Digital-7 Mono" FontSize="26.667" Height="29.6" VerticalAlignment="Bottom" Text="{Binding BigScreenText}" TextAlignment="Right"/>
+                            <TextBlock x:Name="littleScreen" Margin="29.884,0,12.007,-8.659" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Digital-7 Mono" FontSize="18.667" Height="19.025" Text="{Binding LittleScreenText}" TextAlignment="Right"/>
+                            <TextBlock Visibility="{Binding CelsiusIndicatorVisibility}" x:Name="ctemp" Margin="0,80.975,0,1.322" TextWrapping="Wrap" Text="°C" VerticalAlignment="Stretch" FontFamily="Digital-7 Mono" FontSize="9.333" Height="Auto" RenderTransformOrigin="1.119,0.093" HorizontalAlignment="Right" Width="12.007"/>
+                            <TextBlock Visibility="{Binding FahrengeitIndicatorVisibility}" x:Name="ftemp"  Margin="0,80.921,0.5,1.376" TextWrapping="Wrap" Text="°F" VerticalAlignment="Stretch" FontFamily="Digital-7 Mono" FontSize="9.333" Height="Auto" RenderTransformOrigin="1.119,0.093" HorizontalAlignment="Right" Width="12.007"/>
+                            <controls:ArcProgressBar Height="Auto" Margin="2.943,10.171,5,49.704" VerticalAlignment="Stretch" Style="{DynamicResource ArcProgressBarStyle}" MaxValueLabel="{Binding HistogramMaxLabel}" MinValueLabel="{Binding HistogramMinLabel}" Value="{Binding HistorgamValueToBind}"/>
+                            <TextBlock TextAlignment="Center" Margin="22.999,25.779,23.73,0" TextWrapping="Wrap" Text="{Binding HistogramScale}" FontSize="8" Height="7.901" VerticalAlignment="Top" RenderTransformOrigin="0.072,0.336" FontFamily="Ticking Timebomb BB"/>
+
                         </Grid>
                         <StackPanel Margin="244.331,348.334,265.719,328.666" Height="Auto" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="Auto" d:LayoutOverrides="HorizontalAlignment" d:IsLocked="True">
                             <Button x:Name="button" FontSize="8" Height="47" Width="47"  Style="{StaticResource RoundedButton}" Margin="0,0,0,2">
@@ -66,21 +65,68 @@
                                     <TextBlock TextAlignment="Center" FontSize="10" FontWeight="DemiBold" ><Run Text="Mode"/></TextBlock>
                                     <TextBlock TextAlignment="Center" FontSize="10" FontWeight="DemiBold"><Run Text="Hold"/></TextBlock>
                                 </StackPanel>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseDown">
+                                        <command:EventToCommand Command="{Binding ExitecModeHoldButtonCommand}" PassEventArgsToCommand="True"/>
+                                    </i:EventTrigger>
+                                    <i:EventTrigger EventName="PreviewMouseUp">
+                                        <command:EventToCommand Command="{Binding ExitecModeHoldButtonCommand}" PassEventArgsToCommand="True"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
                             </Button>
-                            <Button x:Name="button_Copy"  Height="47" Width="47"  Style="{StaticResource RoundedButton}" FontSize="8" >
+                            <Button Height="47" Width="47"  Style="{StaticResource RoundedButton}" FontSize="8" >
                                 <StackPanel>
                                     <TextBlock TextAlignment="Center" FontSize="10" FontWeight="DemiBold"><Run Text="Call"/></TextBlock>
                                     <TextBlock TextAlignment="Center" FontSize="10" FontWeight="DemiBold"><Run Text="Recall"/></TextBlock>
                                 </StackPanel>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseDown">
+                                        <command:EventToCommand Command="{Binding ExitecCallRecallButtonCommand}" PassEventArgsToCommand="True"/>
+                                    </i:EventTrigger>
+                                    <i:EventTrigger EventName="PreviewMouseUp">
+                                        <command:EventToCommand Command="{Binding ExitecCallRecallButtonCommand}" PassEventArgsToCommand="True"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
                             </Button>
-                            <Button x:Name="button_Copy1" Height="47" Width="47" Style="{StaticResource RoundedButton}" FontSize="8" Margin="18.668,0,18.331,0" HorizontalAlignment="Stretch" >
+                            <Button Height="47" Width="47" Style="{StaticResource RoundedButton}" FontSize="8" Margin="18.668,0,18.331,0" HorizontalAlignment="Stretch" >
                                 <StackPanel>
                                     <TextBlock FontSize="10" FontWeight="DemiBold" TextAlignment="Center"><Run Text="On"/></TextBlock>
                                     <TextBlock FontSize="10" FontWeight="DemiBold" TextAlignment="Center"><Run Text="Off"/></TextBlock>
                                 </StackPanel>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseDown">
+                                        <command:EventToCommand Command="{Binding ExitecOnOffButtonCommand}" PassEventArgsToCommand="True"/>
+                                    </i:EventTrigger>
+                                    <i:EventTrigger EventName="PreviewMouseUp">
+                                        <command:EventToCommand Command="{Binding ExitecOnOffButtonCommand}" PassEventArgsToCommand="True"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
                             </Button>
                         </StackPanel>
                     </Grid>
+                </Grid>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:HannaDeviceViewModel}">
+                <Grid>
+                    <Image x:Name="___Emulator_component_21_01_png" Margin="-133.545,-27,-137,199.058" Source="/Emulator;component/21-01.png" Stretch="Fill"/>
+                    <Grid Height="82.5" Margin="98,88.446,93,0" VerticalAlignment="Top">
+                        <Image x:Name="___Emulator_component_Image2_png" Margin="0" Source="/Emulator;component/Image2.png" Stretch="Fill" d:IsHidden="True"/>
+                        <TextBlock x:Name="textBlock" TextAlignment="Right" HorizontalAlignment="Stretch" Margin="29.28,19.333,10,30.667" TextWrapping="Wrap" Text="TextBlock" FontFamily="Ticking Timebomb BB" FontSize="40" Width="Auto" d:LayoutOverrides="Width" d:IsLocked="True"/>
+                        <TextBlock x:Name="textBlock_Copy" TextAlignment="Right" HorizontalAlignment="Stretch" Margin="29.28,0,21.333,3.667" TextWrapping="Wrap" Text="TextBlock" FontFamily="Ticking Timebomb BB" FontSize="26.667" Width="Auto" Height="27" VerticalAlignment="Bottom"/>
+                        <TextBlock x:Name="textBlock_Copy1" TextAlignment="Right" HorizontalAlignment="Right" Margin="0,0,8.279,15.834" TextWrapping="Wrap" Text="°F" FontFamily="Ticking Timebomb BB" FontSize="13.333" Width="13.054" Height="13.5" VerticalAlignment="Bottom" RenderTransformOrigin="0.817,1.358"/>
+                        <TextBlock x:Name="textBlock_Copy2" TextAlignment="Right" HorizontalAlignment="Right" Margin="0,0,8.279,3.667" TextWrapping="Wrap" Text="°C" FontFamily="Ticking Timebomb BB" FontSize="13.333" Width="13.054" Height="13.5" VerticalAlignment="Bottom" RenderTransformOrigin="0.817,1.358"/>
+                        <TextBlock x:Name="textBlock_Copy3" TextAlignment="Right" HorizontalAlignment="Stretch" Margin="44.001,9.333,53.945,0" TextWrapping="Wrap" Text="mV" FontFamily="Ticking Timebomb BB" FontSize="9.333" Width="Auto" Height="13.5" VerticalAlignment="Top" RenderTransformOrigin="0.817,1.358"/>
+                        <TextBlock x:Name="textBlock_Copy4" TextAlignment="Right" HorizontalAlignment="Right" Margin="0,9.333,8.279,0" TextWrapping="Wrap" Text="pH" FontFamily="Ticking Timebomb BB" FontSize="9.333" Width="13.054" Height="13.5" VerticalAlignment="Top" RenderTransformOrigin="0.817,1.358"/>
+                        <TextBlock x:Name="textBlock_Copy5" TextAlignment="Right" HorizontalAlignment="Left" Margin="10,9.333,0,0" TextWrapping="Wrap" Text="ATC" FontFamily="Ticking Timebomb BB" FontSize="9.333" Width="13.054" Height="7.167" VerticalAlignment="Top" RenderTransformOrigin="0.817,1.358"/>
+                        <TextBlock x:Name="textBlock_Copy6" TextAlignment="Right" HorizontalAlignment="Left" Margin="1.5,0,0,13" TextWrapping="Wrap" Text="Cal" FontFamily="Ticking Timebomb BB" FontSize="9.333" Width="16.054" Height="8.834" VerticalAlignment="Bottom" RenderTransformOrigin="0.817,1.358"/>
+                        <TextBlock x:Name="textBlock_Copy7" TextAlignment="Right" HorizontalAlignment="Left" Margin="6.004,0,0,30.667" TextWrapping="Wrap" Text="%" FontFamily="Ticking Timebomb BB" FontSize="9.333" Width="10.054" Height="9.667" VerticalAlignment="Bottom" RenderTransformOrigin="0.817,1.358"/>
+                    </Grid>
+                    <StackPanel Height="33" Margin="114,206.446,109,0" Orientation="Horizontal" VerticalAlignment="Top" d:LayoutOverrides="Width">
+                        <Button x:Name="button" Content="" Margin="0,0,7,0" VerticalAlignment="Stretch" Style="{DynamicResource RoundedButton}" HorizontalAlignment="Stretch" Height="Auto" Width="32.5"/>
+                        <Button x:Name="button_Copy" Content="" Margin="7,0.5,0,0" VerticalAlignment="Stretch" Style="{DynamicResource RoundedButton}" HorizontalAlignment="Stretch" Height="Auto" Width="32.5"/>
+
+                    </StackPanel>
+
                 </Grid>
             </DataTemplate>
         </ResourceDictionary>
@@ -95,9 +141,12 @@
         <DockPanel>
             <Grid Width="302">
                 <StackPanel Orientation="Vertical" d:LayoutOverrides="Height">
-                    <ToggleButton x:Name="toggleButton" Content="ToggleButton" Margin="0,6,0,0"/>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <TextBlock Margin="30,0,0,0" Text="{Binding DeviceModel.DeviceName}" Width="150"/>
+                        <ToggleButton x:Name="toggleButton" Content="ToggleButton" IsChecked="{Binding IsExitecSelected}"/>
+                    </StackPanel>
                     <ScrollViewer Height="571" VerticalScrollBarVisibility="Disabled" Margin="0,10,0,0">
-                        <ContentControl Content="{Binding DeviceModel}" Height="913" Width="302" ContentTemplate="{DynamicResource ExitechViewTemplate}"/>
+                        <ContentControl Content="{Binding DeviceModel}" Height="913" Width="302" ContentTemplate="{DynamicResource DeviceViewTemplate}"/>
                     </ScrollViewer>
                 </StackPanel>
             </Grid>
@@ -105,9 +154,16 @@
                 <StackPanel Orientation="Vertical" d:LayoutOverrides="Height">
                     <Grid Height="32" Margin="0,6,0,0">
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Width="66" Text="Вариант" VerticalAlignment="Center" TextAlignment="Center"></TextBlock>
-                            <ComboBox x:Name="comboBox" Margin="0" VerticalAlignment="Stretch" Width="144"/>
-                            <Button x:Name="button1" Content="Reset" HorizontalAlignment="Right" Width="120" Command="{Binding ResetCommand}"/>
+                            <TextBlock Width="60" Text="Вариант" VerticalAlignment="Center" TextAlignment="Center"></TextBlock>
+                            <ComboBox Margin="5,0,5,0" VerticalAlignment="Stretch" Width="144" SelectedItem="{Binding Variant}" ItemsSource="{Binding Variants}" DisplayMemberPath="Name" 
+    SelectedValuePath="Id" SelectedIndex="0" IsSynchronizedWithCurrentItem="False" >
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseDown">
+                                        <command:EventToCommand Command="{Binding ResetCommand}" PassEventArgsToCommand="True"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </ComboBox>
+                            <Button Content="Сброс" HorizontalAlignment="Right" Width="100" Command="{Binding ResetCommand}"/>
                         </StackPanel>
                     </Grid>
                     <Grid Height="250">

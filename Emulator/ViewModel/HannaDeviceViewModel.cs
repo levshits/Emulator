@@ -1,6 +1,6 @@
 ﻿namespace Emulator.ViewModel
 {
-    public class HannaDeviceVievModel: IDeviceViewModel
+    public class HannaDeviceViewModel: IDeviceViewModel
     {
         public string DeviceName => "Hanna";
     }

@@ -1,5 +1,7 @@
-﻿using Common.Logging;
+﻿using System.Collections.Generic;
+using Common.Logging;
 using Emulator.Common.Interfaces;
+using Emulator.Common.Models;
 
 namespace Emulator.Data
 {
@@ -9,6 +11,11 @@ namespace Emulator.Data
         public void Reset()
         {
             Log.Debug("Reset data implemented");
+        }
+
+        public List<VariantModel> GetVariants()
+        {
+            return new List<VariantModel>() {new VariantModel() {Id = 1, Name = "Variant 1"}, new VariantModel() {Id = 2, Name = "Variant 2"} };
         }
     }
 }

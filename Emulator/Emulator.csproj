@@ -122,15 +122,18 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Logic\CommandWithDelay.cs" />
+    <Compile Include="Logic\ExitecCallRecallButtonCommand.cs" />
+    <Compile Include="Logic\ExitecModeHoldButtonCommand.cs" />
+    <Compile Include="Logic\ExitecOnOffButtonCommand.cs" />
     <Compile Include="Logic\ResetCommand.cs" />
-    <Compile Include="Model\ExitecModel.cs" />
     <Compile Include="Model\FilterModel.cs" />
     <Compile Include="Model\ModelBase.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="ViewModel\ExitecDeviceViewModel.cs" />
-    <Compile Include="ViewModel\HannaDeviceVievModel.cs" />
+    <Compile Include="ViewModel\HannaDeviceViewModel.cs" />
     <Compile Include="ViewModel\IDeviceViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\TemperatureScale.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -168,6 +171,7 @@
   <ItemGroup>
     <Resource Include="01-01.png" />
     <Resource Include="Image1.png" />
+    <Resource Include="21-01.png" />
     <Content Include="Config\Data.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

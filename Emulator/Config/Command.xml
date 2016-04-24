@@ -1,7 +1,23 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
+
 <objects xmlns="http://www.springframework.net">
   <!--ResetCommand-->
   <object id="ResetCommand" type="Emulator.Logic.ResetCommand, Emulator">
-    <property name="DataProvider" ref="IDataProvider"/>
+    <property name="DataProvider" ref="IDataProvider" />
+  </object>
+
+  <!--ExitecModeButtonCommand-->
+  <object id="ExitecModeHoldButtonCommand" type="Emulator.Logic.ExitecModeHoldButtonCommand, Emulator">
+    <property name="ExitecDeviceViewModel" ref="ExitecDeviceViewModel" />
+  </object>
+
+  <!--ExitecModeButtonCommand-->
+  <object id="ExitecOnOffButtonCommand" type="Emulator.Logic.ExitecOnOffButtonCommand, Emulator">
+    <property name="ExitecDeviceViewModel" ref="ExitecDeviceViewModel" />
+  </object>
+  
+  <!--ExitecModeButtonCommand-->
+  <object id="ExitecCallRecallButtonCommand" type="Emulator.Logic.ExitecCallRecallButtonCommand, Emulator">
+    <property name="ExitecDeviceViewModel" ref="ExitecDeviceViewModel" />
   </object>
 </objects>

@@ -7,7 +7,7 @@ namespace Emulator.Logic
 {
     public class ResetCommand: ICommand
     {
-        private static ILog _log = LogManager.GetLogger(typeof(ResetCommand));
+        private static readonly ILog Log = LogManager.GetLogger(typeof(ResetCommand));
         public IDataProvider DataProvider { get; set; }
 
         public bool CanExecute(object parameter)
@@ -17,10 +17,14 @@ namespace Emulator.Logic
 
         public void Execute(object parameter)
         {
-            _log.Debug("Reset");
+            Log.Debug("Reset");
             DataProvider.Reset();
         }
 
-        public event EventHandler CanExecuteChanged;
+        public event EventHandler CanExecuteChanged
+        {
+            add { CommandManager.RequerySuggested += value; }
+            remove { CommandManager.RequerySuggested -= value; }
+        }
     }
 }
