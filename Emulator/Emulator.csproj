@@ -126,7 +126,10 @@
     <Compile Include="Logic\ExitecCallRecallButtonCommand.cs" />
     <Compile Include="Logic\ExitecModeHoldButtonCommand.cs" />
     <Compile Include="Logic\ExitecOnOffButtonCommand.cs" />
+    <Compile Include="Logic\HannaOnModeButtonCommand.cs" />
+    <Compile Include="Logic\HannaSetHoldButtonClick.cs" />
     <Compile Include="Logic\ResetCommand.cs" />
+    <Compile Include="Model\DelayedCommandEvents.cs" />
     <Compile Include="Model\HannaScaleMode.cs" />
     <Compile Include="Model\ModelBase.cs" />
     <Compile Include="Properties\Annotations.cs" />

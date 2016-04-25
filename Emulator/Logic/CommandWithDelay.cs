@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Windows.Input;
 using Common.Logging;
+using Emulator.Model;
 
 namespace Emulator.Logic
 {
@@ -21,18 +22,31 @@ namespace Emulator.Logic
 
         public virtual void Execute(object parameter)
         {
-            MouseButtonEventArgs args = parameter as MouseButtonEventArgs;
-            if (args != null)
+            Guid? args = parameter as Guid?;
+
+            if (args.HasValue)
             {
-                if (args.ButtonState == MouseButtonState.Pressed)
+                if (args == DelayedCommandEvents.MouseDown)
                 {
                     DoPressExecute();
                 }
-                else
+                else if (args == DelayedCommandEvents.MouseUp)
                 {
                     DoReleaseExecute();
                 }
+                else if (args == DelayedCommandEvents.Click && Counter == 0)
+                {
+                    DoClickExecute();
+                }
+                else if (args == DelayedCommandEvents.DoubleClick && Counter == 0)
+                {
+                    DoDoubleClickExecute();
+                }
             }
+        }
+
+        public virtual void DoDoubleClickExecute()
+        {
         }
 
         /// <summary>
@@ -49,13 +63,9 @@ namespace Emulator.Logic
         {
             Log.Debug("Timer release");
             Timer.Change(-1, -1);
-            if (Counter == 0)
-            {
-                DoShortClickExecute();
-            }
         }
 
-        public virtual void DoShortClickExecute()
+        public virtual void DoClickExecute()
         {
         }
 

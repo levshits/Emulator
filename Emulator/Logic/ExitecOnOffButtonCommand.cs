@@ -26,7 +26,7 @@ namespace Emulator.Logic
             ExitecDeviceViewModel.LittleScreenText = "Rel";
         }
 
-        public override void DoShortClickExecute()
+        public override void DoClickExecute()
         {
             ExitecDeviceViewModel.DeviceScreenVisibility = Visibility.Visible;
         }

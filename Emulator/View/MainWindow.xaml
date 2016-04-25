@@ -12,6 +12,7 @@
     xmlns:command="http://www.galasoft.ch/mvvmlight"
     xmlns:viewModel="clr-namespace:Emulator.ViewModel"
     xmlns:common="clr-namespace:Emulator.Common.Models;assembly=Emulator.Common"
+    xmlns:model="clr-namespace:Emulator.Model"
     x:Class="Emulator.Views.MainWindow"
     mc:Ignorable="d"
     Title="Water emulation" Height="600" Width="650"
@@ -108,11 +109,19 @@
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="PreviewMouseDown">
                                         <command:EventToCommand Command="{Binding ExitecModeHoldButtonCommand}"
-                                                                PassEventArgsToCommand="True" />
+                                                                CommandParameter="{Binding Source={x:Static model:DelayedCommandEvents.MouseDown}}" />
                                     </i:EventTrigger>
                                     <i:EventTrigger EventName="PreviewMouseUp">
                                         <command:EventToCommand Command="{Binding ExitecModeHoldButtonCommand}"
-                                                                PassEventArgsToCommand="True" />
+                                                                CommandParameter="{Binding Source={x:Static model:DelayedCommandEvents.MouseUp}}" />
+                                    </i:EventTrigger>
+                                    <i:EventTrigger EventName="Click">
+                                        <command:EventToCommand Command="{Binding ExitecModeHoldButtonCommand}"
+                                                                CommandParameter="{Binding Source={x:Static model:DelayedCommandEvents.Click}}" />
+                                    </i:EventTrigger>
+                                    <i:EventTrigger EventName="MouseDoubleClick">
+                                        <command:EventToCommand Command="{Binding ExitecModeHoldButtonCommand}"
+                                                                CommandParameter="{Binding Source={x:Static model:DelayedCommandEvents.DoubleClick}}" />
                                     </i:EventTrigger>
                                 </i:Interaction.Triggers>
                             </Button>
@@ -128,11 +137,19 @@
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="PreviewMouseDown">
                                         <command:EventToCommand Command="{Binding ExitecCallRecallButtonCommand}"
-                                                                PassEventArgsToCommand="True" />
+                                                                CommandParameter="{Binding Source={x:Static model:DelayedCommandEvents.MouseDown}}" />
                                     </i:EventTrigger>
                                     <i:EventTrigger EventName="PreviewMouseUp">
                                         <command:EventToCommand Command="{Binding ExitecCallRecallButtonCommand}"
-                                                                PassEventArgsToCommand="True" />
+                                                                CommandParameter="{Binding Source={x:Static model:DelayedCommandEvents.MouseUp}}" />
+                                    </i:EventTrigger>
+                                    <i:EventTrigger EventName="Click">
+                                        <command:EventToCommand Command="{Binding ExitecCallRecallButtonCommand}"
+                                                                CommandParameter="{Binding Source={x:Static model:DelayedCommandEvents.Click}}" />
+                                    </i:EventTrigger>
+                                    <i:EventTrigger EventName="MouseDoubleClick">
+                                        <command:EventToCommand Command="{Binding ExitecCallRecallButtonCommand}"
+                                                                CommandParameter="{Binding Source={x:Static model:DelayedCommandEvents.DoubleClick}}" />
                                     </i:EventTrigger>
                                 </i:Interaction.Triggers>
                             </Button>
@@ -149,11 +166,19 @@
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="PreviewMouseDown">
                                         <command:EventToCommand Command="{Binding ExitecOnOffButtonCommand}"
-                                                                PassEventArgsToCommand="True" />
+                                                                CommandParameter="{Binding Source={x:Static model:DelayedCommandEvents.MouseDown}}" />
                                     </i:EventTrigger>
                                     <i:EventTrigger EventName="PreviewMouseUp">
                                         <command:EventToCommand Command="{Binding ExitecOnOffButtonCommand}"
-                                                                PassEventArgsToCommand="True" />
+                                                                CommandParameter="{Binding Source={x:Static model:DelayedCommandEvents.MouseUp}}" />
+                                    </i:EventTrigger>
+                                    <i:EventTrigger EventName="Click">
+                                        <command:EventToCommand Command="{Binding ExitecOnOffButtonCommand}"
+                                                                CommandParameter="{Binding Source={x:Static model:DelayedCommandEvents.Click}}" />
+                                    </i:EventTrigger>
+                                    <i:EventTrigger EventName="MouseDoubleClick">
+                                        <command:EventToCommand Command="{Binding ExitecOnOffButtonCommand}"
+                                                                CommandParameter="{Binding Source={x:Static model:DelayedCommandEvents.DoubleClick}}" />
                                     </i:EventTrigger>
                                 </i:Interaction.Triggers>
                             </Button>
@@ -217,10 +242,48 @@
                                 d:LayoutOverrides="Width">
                         <Button Content="" Margin="0,0,7,0" VerticalAlignment="Stretch"
                                 Style="{DynamicResource RoundedButton}" HorizontalAlignment="Stretch" Height="Auto"
-                                Width="32.5" />
+                                Width="32.5" >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="PreviewMouseDown">
+                                    <command:EventToCommand Command="{Binding ExitecModeHoldButtonCommand}"
+                                                                CommandParameter="{Binding Source={x:Static model:DelayedCommandEvents.MouseDown}}" />
+                                </i:EventTrigger>
+                                <i:EventTrigger EventName="PreviewMouseUp">
+                                    <command:EventToCommand Command="{Binding ExitecModeHoldButtonCommand}"
+                                                                CommandParameter="{Binding Source={x:Static model:DelayedCommandEvents.MouseUp}}" />
+                                </i:EventTrigger>
+                                <i:EventTrigger EventName="Click">
+                                    <command:EventToCommand Command="{Binding ExitecModeHoldButtonCommand}"
+                                                                CommandParameter="{Binding Source={x:Static model:DelayedCommandEvents.Click}}" />
+                                </i:EventTrigger>
+                                <i:EventTrigger EventName="MouseDoubleClick">
+                                    <command:EventToCommand Command="{Binding ExitecModeHoldButtonCommand}"
+                                                                CommandParameter="{Binding Source={x:Static model:DelayedCommandEvents.DoubleClick}}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Button>
                         <Button Content="" Margin="7,0.5,0,0" VerticalAlignment="Stretch"
                                 Style="{DynamicResource RoundedButton}" HorizontalAlignment="Stretch" Height="Auto"
-                                Width="32.5" />
+                                Width="32.5">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="PreviewMouseDown">
+                                    <command:EventToCommand Command="{Binding ExitecModeHoldButtonCommand}"
+                                                                CommandParameter="{Binding Source={x:Static model:DelayedCommandEvents.MouseDown}}" />
+                                </i:EventTrigger>
+                                <i:EventTrigger EventName="PreviewMouseUp">
+                                    <command:EventToCommand Command="{Binding ExitecModeHoldButtonCommand}"
+                                                                CommandParameter="{Binding Source={x:Static model:DelayedCommandEvents.MouseUp}}" />
+                                </i:EventTrigger>
+                                <i:EventTrigger EventName="Click">
+                                    <command:EventToCommand Command="{Binding ExitecModeHoldButtonCommand}"
+                                                                CommandParameter="{Binding Source={x:Static model:DelayedCommandEvents.Click}}" />
+                                </i:EventTrigger>
+                                <i:EventTrigger EventName="MouseDoubleClick">
+                                    <command:EventToCommand Command="{Binding ExitecModeHoldButtonCommand}"
+                                                                CommandParameter="{Binding Source={x:Static model:DelayedCommandEvents.DoubleClick}}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Button>
 
                     </StackPanel>
 
@@ -258,8 +321,7 @@
                                       SelectedValuePath="Id" SelectedIndex="0" IsSynchronizedWithCurrentItem="False">
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="PreviewMouseDown">
-                                        <command:EventToCommand Command="{Binding ResetCommand}"
-                                                                PassEventArgsToCommand="True" />
+                                        <command:EventToCommand Command="{Binding ResetCommand}" CommandParameter="{Binding Source={x:Static model:DelayedCommandEvents.MouseDown}}" />
                                     </i:EventTrigger>
                                 </i:Interaction.Triggers>
                             </ComboBox>
