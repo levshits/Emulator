@@ -183,7 +183,7 @@ namespace Emulator.ViewModel
 
         #region Actions
 
-        public void EnableDeice()
+        public void EnableDevice()
         {
             DeviceScreenVisibility = Visibility.Visible;
         }

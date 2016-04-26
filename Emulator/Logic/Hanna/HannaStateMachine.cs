@@ -19,13 +19,18 @@ namespace Emulator.Logic.Hanna
                 Log.Warn(string.Format("The trigger has been ignored: state ={0}, trigger={1}", states, triggers));
             }));
 
+            StateMachine.OnTransitioned((state) =>
+            {
+                Log.Debug("Transition finished");
+            });
+
             StateMachine.Configure(HannaDeviceStates.Disabled)
-                .OnEntry(HannaDeviceViewModel.EnableDeice)
+                .OnEntry(HannaDeviceViewModel.DisableDevice)
                 .Permit(HannaDeviceTriggers.OnModeButtonClick, HannaDeviceStates.Enabled)
                 .Ignore(HannaDeviceTriggers.OnModeButtonLongClick);
 
             StateMachine.Configure(HannaDeviceStates.Enabled)
-                .OnEntry(HannaDeviceViewModel.DisableDevice)
+                .OnEntry(HannaDeviceViewModel.EnableDevice)
                 .Permit(HannaDeviceTriggers.OnModeButtonClick, HannaDeviceStates.Disabled)
                 .Ignore(HannaDeviceTriggers.OnModeButtonLongClick);
 

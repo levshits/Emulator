@@ -18,15 +18,21 @@ namespace Emulator.Logic.Exitech
                 Log.Warn(string.Format("The trigger has been ignored: state ={0}, trigger={1}", states, triggers));
             }));
 
+            StateMachine.OnTransitioned((state) =>
+            {
+                Log.Debug("Transition finished");
+            });
+
             StateMachine.Configure(ExitechDeviceStates.Disabled)
-                .OnEntry(ExitechDeviceViewModel.EnableDevice)
+                .OnEntry(ExitechDeviceViewModel.DisableDevice)
                 .Permit(ExitechDeviceTriggers.OnOffButtonClick, ExitechDeviceStates.Enabled)
                 .Ignore(ExitechDeviceTriggers.OnOffButtonLongClick);
 
             StateMachine.Configure(ExitechDeviceStates.Enabled)
-                .OnEntry(ExitechDeviceViewModel.DisableDevice)
+                .OnEntry(ExitechDeviceViewModel.EnableDevice)
                 .Permit(ExitechDeviceTriggers.OnOffButtonClick, ExitechDeviceStates.Disabled)
                 .Ignore(ExitechDeviceTriggers.OnOffButtonLongClick);
+
         }
     }
 }
