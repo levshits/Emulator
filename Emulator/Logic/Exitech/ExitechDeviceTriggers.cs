@@ -1,6 +1,6 @@
-﻿namespace Emulator.Logic.Exitec
+﻿namespace Emulator.Logic.Exitech
 {
-    public enum ExitecDeviceTriggers
+    public enum ExitechDeviceTriggers
     {
         OnOffButtonClick,
         OnOffButtonLongClick,

@@ -4,9 +4,9 @@ using Emulator.ViewModel;
 
 namespace Emulator.Logic
 {
-    public class ExitecModeHoldButtonCommand: CommandWithDelay
+    public class ExitechModeHoldButtonCommand: CommandWithDelay
     {
-        public ExitecDeviceViewModel ExitecDeviceViewModel { get; set; }
+        public ExitechDeviceViewModel ExitechDeviceViewModel { get; set; }
 
         public override bool CanExecute(object parameter)
         {
@@ -23,14 +23,14 @@ namespace Emulator.Logic
         public override void DoReleaseExecute()
         {
             base.DoReleaseExecute();
-            ExitecDeviceViewModel.LittleScreenText = "Rel";
+            ExitechDeviceViewModel.LittleScreenText = "Rel";
         }
 
         protected override void TimerHandler(object state)
         {
             Log.Debug("Timer tick");
             Counter++;
-            ExitecDeviceViewModel.TemperatureScale = ExitecDeviceViewModel.TemperatureScale == TemperatureScale.Celsius
+            ExitechDeviceViewModel.TemperatureScale = ExitechDeviceViewModel.TemperatureScale == TemperatureScale.Celsius
                 ? TemperatureScale.Fahrenheit
                 : TemperatureScale.Celsius;
         }

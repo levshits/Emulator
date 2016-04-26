@@ -2,7 +2,7 @@
 using System.Runtime.CompilerServices;
 using Emulator.Properties;
 
-namespace Emulator.Models
+namespace Emulator.Model
 {
     public class ModelBase : INotifyPropertyChanged
     {

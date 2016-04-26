@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Threading;
 using Common.Logging;
-using Emulator.Views;
+using Emulator.View;
 using Spring.Context.Support;
 
 namespace Emulator

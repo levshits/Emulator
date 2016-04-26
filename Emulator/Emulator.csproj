@@ -127,12 +127,12 @@
     </Compile>
     <Compile Include="Logic\ApplyFilterCommand.cs" />
     <Compile Include="Logic\CommandWithDelay.cs" />
-    <Compile Include="Logic\ExitecCallRecallButtonCommand.cs" />
-    <Compile Include="Logic\ExitecModeHoldButtonCommand.cs" />
-    <Compile Include="Logic\ExitecOnOffButtonCommand.cs" />
-    <Compile Include="Logic\Exitec\ExitecDeviceStates.cs" />
-    <Compile Include="Logic\Exitec\ExitecDeviceTriggers.cs" />
-    <Compile Include="Logic\Exitec\ExitecStateMachine.cs" />
+    <Compile Include="Logic\ExitechCallRecallButtonCommand.cs" />
+    <Compile Include="Logic\ExitechModeHoldButtonCommand.cs" />
+    <Compile Include="Logic\ExitechOnOffButtonCommand.cs" />
+    <Compile Include="Logic\Exitech\ExitechDeviceStates.cs" />
+    <Compile Include="Logic\Exitech\ExitechDeviceTriggers.cs" />
+    <Compile Include="Logic\Exitech\ExitechStateMachine.cs" />
     <Compile Include="Logic\HannaOnModeButtonCommand.cs" />
     <Compile Include="Logic\HannaSetHoldButtonCommand.cs" />
     <Compile Include="Logic\Hanna\HannaDeviceStates.cs" />
@@ -143,7 +143,7 @@
     <Compile Include="Model\HannaScaleMode.cs" />
     <Compile Include="Model\ModelBase.cs" />
     <Compile Include="Properties\Annotations.cs" />
-    <Compile Include="ViewModel\ExitecDeviceViewModel.cs" />
+    <Compile Include="ViewModel\ExitechDeviceViewModel.cs" />
     <Compile Include="ViewModel\HannaDeviceViewModel.cs" />
     <Compile Include="ViewModel\IDeviceViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />

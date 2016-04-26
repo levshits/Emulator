@@ -5,7 +5,7 @@ using Emulator.Logic;
 
 namespace Emulator.ViewModel
 {
-    public class ExitecDeviceViewModel : ViewModelBase, IDeviceViewModel
+    public class ExitechDeviceViewModel : ViewModelBase, IDeviceViewModel
     {
         private string _bigScreenText;
         private string _littleScreenText;
@@ -15,10 +15,10 @@ namespace Emulator.ViewModel
         private decimal _historgamValue;
         private Visibility _deviceScreenVisibility;
         private string _histogramScale;
-        public string DeviceName => "Exitec";
-        public ICommand ExitecModeHoldButtonCommand { get; set; }
-        public ICommand ExitecCallRecallButtonCommand { get; set; }
-        public ICommand ExitecOnOffButtonCommand { get; set; }
+        public string DeviceName => "Exitech";
+        public ICommand ExitechModeHoldButtonCommand { get; set; }
+        public ICommand ExitechCallRecallButtonCommand { get; set; }
+        public ICommand ExitechOnOffButtonCommand { get; set; }
 
         public void OnInit()
         {
@@ -82,7 +82,7 @@ namespace Emulator.ViewModel
             }
         }
 
-        public ExitecDeviceViewModel()
+        public ExitechDeviceViewModel()
         {
         }
 

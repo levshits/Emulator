@@ -8,14 +8,14 @@
     <constructor-arg name="dataProvider" ref="IDataProvider"/>
     <property name="ResetCommand" ref="ResetCommand"/>
     <property name="ApplyFilterCommand" ref="ApplyFilterCommand"/>
-    <property name="ExitecDeviceViewModel" ref="ExitecDeviceViewModel"/>
+    <property name="ExitechDeviceViewModel" ref="ExitechDeviceViewModel"/>
     <property name="HannaDeviceViewModel" ref="HannaDeviceViewModel"/>
   </object>
   
-  <object id="ExitecDeviceViewModel" type="Emulator.ViewModel.ExitecDeviceViewModel, Emulator" singleton="true" init-method="OnInit">
-    <property name="ExitecModeHoldButtonCommand" ref="ExitecModeHoldButtonCommand"/>
-    <property name="ExitecCallRecallButtonCommand" ref="ExitecCallRecallButtonCommand"/>
-    <property name="ExitecOnOffButtonCommand" ref="ExitecOnOffButtonCommand"/>
+  <object id="ExitechDeviceViewModel" type="Emulator.ViewModel.ExitechDeviceViewModel, Emulator" singleton="true" init-method="OnInit">
+    <property name="ExitechModeHoldButtonCommand" ref="ExitechModeHoldButtonCommand"/>
+    <property name="ExitechCallRecallButtonCommand" ref="ExitechCallRecallButtonCommand"/>
+    <property name="ExitechOnOffButtonCommand" ref="ExitechOnOffButtonCommand"/>
   </object>
 
   <object id="HannaDeviceViewModel" type="Emulator.ViewModel.HannaDeviceViewModel, Emulator" singleton="true" init-method="OnInit">

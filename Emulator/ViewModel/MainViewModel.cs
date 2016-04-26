@@ -3,7 +3,6 @@ using System.Windows.Input;
 using Emulator.Common.Interfaces;
 using Emulator.Common.Models;
 using Emulator.Logic;
-using Emulator.Models;
 
 namespace Emulator.ViewModel
 {
@@ -35,7 +34,7 @@ namespace Emulator.ViewModel
             }
         }
 
-        public ExitecDeviceViewModel ExitecDeviceViewModel { get; set; }
+        public ExitechDeviceViewModel ExitechDeviceViewModel { get; set; }
         public HannaDeviceViewModel HannaDeviceViewModel { get; set; }
         public List<FilterModel> FilterModels { get; set; }
         public List<VariantModel> Variants { get; set; }
@@ -71,7 +70,7 @@ namespace Emulator.ViewModel
 
         private void SetDeviceModel()
         {
-            DeviceModel = IsExitecSelected ? (IDeviceViewModel) ExitecDeviceViewModel : HannaDeviceViewModel;
+            DeviceModel = IsExitecSelected ? (IDeviceViewModel) ExitechDeviceViewModel : HannaDeviceViewModel;
         }
     }
 }

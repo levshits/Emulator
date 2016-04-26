@@ -3,9 +3,9 @@ using Emulator.ViewModel;
 
 namespace Emulator.Logic
 {
-    public class ExitecCallRecallButtonCommand: CommandWithDelay
+    public class ExitechCallRecallButtonCommand: CommandWithDelay
     {
-        public ExitecDeviceViewModel ExitecDeviceViewModel { get; set; }
+        public ExitechDeviceViewModel ExitechDeviceViewModel { get; set; }
 
         public override bool CanExecute(object parameter)
         {
@@ -17,14 +17,14 @@ namespace Emulator.Logic
             base.DoReleaseExecute();
             Log.Debug("Timer release");
             Timer.Change(-1, -1);
-            ExitecDeviceViewModel.LittleScreenText = "Rel";
+            ExitechDeviceViewModel.LittleScreenText = "Rel";
         }
 
         protected override void TimerHandler(object state)
         {
             Log.Debug("Timer tick");
             Counter++;
-            ExitecDeviceViewModel.BigScreenText = Counter.ToString();
+            ExitechDeviceViewModel.BigScreenText = Counter.ToString();
         }
     }
 }
