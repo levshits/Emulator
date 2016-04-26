@@ -1,5 +1,9 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using Emulator.Logic;
@@ -9,6 +13,10 @@ namespace Emulator.ViewModel
 {
     public class ExitechDeviceViewModel : ViewModelBase, IDeviceViewModel
     {
+        private const int MEMORY_SIZE = 25;
+        private const string PERCENT = "%";
+        private const string PROMILLE = "ppm";
+        private const string MG_PER_L = "mg/L";
         private string _bigScreenText;
         private string _littleScreenText;
         private TemperatureScale _temperatureScale;
@@ -17,6 +25,8 @@ namespace Emulator.ViewModel
         private decimal _historgamValue;
         private Visibility _deviceScreenVisibility;
         private string _histogramScale;
+        private Visibility _holdIndicatorVisibility;
+        private bool _isTemperatureScaleVisible;
         public string DeviceName => "Exitech";
         public ICommand ExitechModeHoldButtonCommand { get; set; }
         public ICommand ExitechCallRecallButtonCommand { get; set; }
@@ -30,10 +40,25 @@ namespace Emulator.ViewModel
             HistogramMaxValue = 100;
             HistorgamValue = 50;
             DeviceScreenVisibility = Visibility.Hidden;
-            HistogramScale = "%";
+            HistogramScale = PERCENT;
+            IsTemperatureScaleVisible = false;
+            HoldIndicatorVisibility = Visibility.Hidden;
         }
 
         #region Properties
+
+        public List<HistoryModel> ValuesHistory { get; set; } = new List<HistoryModel>();
+
+        public bool IsTemperatureScaleVisible
+        {
+            get { return _isTemperatureScaleVisible; }
+            set
+            {
+                _isTemperatureScaleVisible = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(TemperatureScale));
+            }
+        }
 
         public TemperatureScale TemperatureScale
         {
@@ -49,7 +74,12 @@ namespace Emulator.ViewModel
 
         public Visibility FahrengeitIndicatorVisibility
         {
-            get { return TemperatureScale == TemperatureScale.Fahrenheit ? Visibility.Visible : Visibility.Hidden; }
+            get
+            {
+                return TemperatureScale == TemperatureScale.Fahrenheit && IsTemperatureScaleVisible
+                    ? Visibility.Visible
+                    : Visibility.Hidden;
+            }
             set
             {
                 TemperatureScale = value == Visibility.Visible ? TemperatureScale.Fahrenheit : TemperatureScale.Celsius;
@@ -61,12 +91,24 @@ namespace Emulator.ViewModel
         {
             get
             {
-                return TemperatureScale == TemperatureScale.Celsius ? Visibility.Visible : Visibility.Hidden;
+                return TemperatureScale == TemperatureScale.Celsius && IsTemperatureScaleVisible
+                    ? Visibility.Visible
+                    : Visibility.Hidden;
                 ;
             }
             set
             {
                 TemperatureScale = value == Visibility.Visible ? TemperatureScale.Celsius : TemperatureScale.Fahrenheit;
+                OnPropertyChanged();
+            }
+        }
+
+        public Visibility HoldIndicatorVisibility
+        {
+            get { return _holdIndicatorVisibility; }
+            set
+            {
+                _holdIndicatorVisibility = value;
                 OnPropertyChanged();
             }
         }
@@ -158,13 +200,47 @@ namespace Emulator.ViewModel
             }
         }
 
+        public decimal TemperatureInCelsius
+        {
+            get { return _temperatureInCelsius; }
+            set
+            {
+                _temperatureInCelsius = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public decimal OxygenInPercents
+        {
+            get { return _oxygenInPercents; }
+            set
+            {
+                _oxygenInPercents = value;
+                OnPropertyChanged();
+            }
+        }
+
         #endregion Properties
 
         #region Actions
 
         public void EnableDevice()
         {
-            DeviceScreenVisibility = Visibility.Visible;
+            // replace with getting info from data provider
+            IsTemperatureScaleVisible = true;
+            HistoryItem = null;
+            OxygenInPercents = 50;
+
+            HistogramMinValue = measureLimits[GetMeasureSetting()].Key;
+            HistogramMaxValue = measureLimits[GetMeasureSetting()].Value;
+            HistorgamValue = ConvertMeasureValue(OxygenInPercents, PERCENT, GetMeasureSetting());
+            TemperatureInCelsius = (decimal) 28.9;
+            BigScreenText = ConvertValueToString(ConvertMeasureValue(OxygenInPercents, PERCENT, GetMeasureSetting()));
+            LittleScreenText =
+                ConvertTemperatureToString(TemperatureScale == TemperatureScale.Celsius
+                    ? TemperatureInCelsius
+                    : ConvertCelsiusToFarengeit(TemperatureInCelsius));
+            HistogramScale = GetMeasureSetting();
         }
 
         public void DisableDevice()
@@ -172,13 +248,176 @@ namespace Emulator.ViewModel
             DeviceScreenVisibility = Visibility.Hidden;
         }
 
-        public void Initialize()
+        public async Task Initialize()
         {
-            BigScreenText = "Init";
-            Thread.Sleep(500);
+            DeviceScreenVisibility = Visibility.Visible;
+            BigScreenText = "SELF";
+            LittleScreenText = "CAL";
+            await Task.Delay(3000);
             ExitechStateMachine.Fire(ExitechDeviceTriggers.TimerTick);
         }
 
+        public async Task OnClear()
+        {
+            BigScreenText = "CLR";
+            LittleScreenText = "";
+            ValuesHistory.Clear();
+            await Task.Delay(3000);
+            ExitechStateMachine.Fire(ExitechDeviceTriggers.TimerTick);
+        }
+
+        public void OnHoldEntry()
+        {
+            //Memory contains only 25 symbols
+            ValuesHistory.Insert(ValuesHistory.Count%MEMORY_SIZE,
+                new HistoryModel() {MeasureSetting = GetMeasureSetting(), Value = Decimal.Parse(BigScreenText)});
+            LittleScreenText = (ValuesHistory.Count%MEMORY_SIZE).ToString();
+            IsTemperatureScaleVisible = false;
+            HoldIndicatorVisibility = Visibility.Visible;
+        }
+
         #endregion Actions
+
+        public void OnHoldExit()
+        {
+            HoldIndicatorVisibility = Visibility.Hidden;
+        }
+
+        public int? HistoryItem { get; set; }
+
+        public async Task OnHistoryEntry()
+        {
+            if (ValuesHistory.Any())
+            {
+                HistoryItem = HistoryItem ?? 0;
+                LittleScreenText = (HistoryItem + 1).ToString();
+                BigScreenText = ConvertValueToString(ConvertToCurrentValue(ValuesHistory[HistoryItem.Value]));
+                IsTemperatureScaleVisible = false;
+                HistoryItem = (HistoryItem + 1)%ValuesHistory.Count;
+            }
+            else
+            {
+                BigScreenText = "END";
+                LittleScreenText = "";
+                await Task.Delay(2000);
+                ExitechStateMachine.Fire(ExitechDeviceTriggers.CallRecallClick);
+            }
+        }
+
+        public void OnMeasureSettingEntry()
+        {
+            IsTemperatureScaleVisible = false;
+            var measureSetting = GetNextMeasureSetting();
+            HistogramScale = measureSetting;
+            BigScreenText = measureSetting;
+            LittleScreenText = "";
+        }
+
+        public int MeasureIndex { get; set; }
+        private readonly List<string> _measureSetting = new List<string> {PERCENT, PROMILLE, MG_PER_L};
+
+        private readonly Dictionary<string, KeyValuePair<decimal, decimal>> measureLimits = new Dictionary
+            <string, KeyValuePair<decimal, decimal>>
+        {
+            {PERCENT, new KeyValuePair<decimal, decimal>(0, 200)},
+            {PROMILLE, new KeyValuePair<decimal, decimal>(0, 20)},
+            {MG_PER_L, new KeyValuePair<decimal, decimal>(0, 20)},
+        };
+
+        private decimal _temperatureInCelsius;
+        private decimal _oxygenInPercents;
+
+        private string GetNextMeasureSetting()
+        {
+            MeasureIndex++;
+            return GetMeasureSetting();
+        }
+
+        private string GetMeasureSetting()
+        {
+            return _measureSetting[MeasureIndex%_measureSetting.Count];
+        }
+
+        public async Task OnHistoryExit()
+        {
+            await Task.Delay(1000);
+        }
+
+        private decimal ConvertToCurrentValue(HistoryModel model)
+        {
+            var currentMeasure = GetMeasureSetting();
+            return ConvertMeasureValue(model.Value, model.MeasureSetting, currentMeasure);
+        }
+
+        private static decimal ConvertMeasureValue(decimal value, string sourceMeasure, string currentMeasure)
+        {
+            decimal convertToCurrentValue = 0;
+            if (sourceMeasure == currentMeasure)
+            {
+                convertToCurrentValue = value;
+            }
+            else
+            {
+                if (sourceMeasure == PERCENT && currentMeasure == PROMILLE)
+                {
+                    convertToCurrentValue = value/10;
+                }
+                else if (sourceMeasure == PROMILLE && currentMeasure == PERCENT)
+                {
+                    convertToCurrentValue = value*10;
+                }
+                else if (sourceMeasure == PERCENT && currentMeasure == MG_PER_L)
+                {
+                    convertToCurrentValue = value/10;
+                }
+                else if (sourceMeasure == PROMILLE && currentMeasure == MG_PER_L)
+                {
+                    convertToCurrentValue = value;
+                }
+                else if (sourceMeasure == MG_PER_L && currentMeasure == PROMILLE)
+                {
+                    convertToCurrentValue = value;
+                }
+                else if (sourceMeasure == MG_PER_L && currentMeasure == PERCENT)
+                {
+                    convertToCurrentValue = value*10;
+                }
+            }
+            return convertToCurrentValue;
+        }
+
+        private static decimal ConvertCelsiusToFarengeit(decimal value)
+        {
+            return value*(decimal) 1.80 + 32;
+        }
+
+        private static string ConvertTemperatureToString(decimal value)
+        {
+            return $"{value:##.0}";
+        }
+
+        private string ConvertValueToString(decimal value)
+        {
+            var currentMeasure = GetMeasureSetting();
+            if (currentMeasure == PROMILLE)
+            {
+                return $"{value:##.00}";
+            }
+            else if (currentMeasure == PERCENT)
+            {
+                return $"{value:###.0}";
+            }
+            else if (currentMeasure == MG_PER_L)
+            {
+                return $"{value:##.00}";
+            }
+            return String.Empty;
+        }
+
+        public class HistoryModel
+        {
+            public decimal Value { get; set; }
+            public string MeasureSetting { get; set; }
+        }
     }
 }

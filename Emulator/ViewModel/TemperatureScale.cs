@@ -2,7 +2,8 @@
 {
     public enum TemperatureScale
     {
-        Celsius = 0,
-        Fahrenheit = 1
+        None = 0,
+        Celsius = 1,
+        Fahrenheit = 2
     }
 }

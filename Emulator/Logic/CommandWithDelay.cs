@@ -22,7 +22,10 @@ namespace Emulator.Logic
             Timer = new Timer(TimerHandler);
         }
 
-        protected abstract void TimerHandler(object state);
+        protected virtual void TimerHandler(object state)
+        {
+            Counter++;
+        }
 
         public virtual void Execute(object parameter)
         {

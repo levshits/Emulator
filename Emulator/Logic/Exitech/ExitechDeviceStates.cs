@@ -4,6 +4,12 @@
     {
         Enabled,
         Loading,
-        Disabled
+        Disabled,
+        Calibration,
+        Hold,
+        History,
+        Clear,
+        Measure,
+        MeasureSetting
     }
 }

@@ -7,25 +7,31 @@ namespace Emulator.Logic
 {
     public class ExitechOnOffButtonCommand: CommandWithDelay
     {
-        public ExitechDeviceViewModel ExitechDeviceViewModel { get; set; }
         public ExitechStateMachine ExitechStateMachine { get; set; }
 
-        public override void DoReleaseExecute()
+        protected override void TimerHandler(object state)
         {
-            base.DoReleaseExecute();
-            ExitechDeviceViewModel.LittleScreenText = "Rel";
+            base.TimerHandler(state);
+            if (Counter == 4)
+            {
+                ExitechStateMachine.Fire(ExitechDeviceTriggers.Clear);
+            }
+            else
+            {
+                ExitechStateMachine.Fire(ExitechDeviceTriggers.OnOffTimerTick);
+            }
+        }
+
+        public override void DoDoubleClickExecute()
+        {
+            base.DoDoubleClickExecute();
+            ExitechStateMachine.Fire(ExitechDeviceTriggers.OnOffButtonDoubleClick);
         }
 
         public override void DoClickExecute()
         {
+            base.DoClickExecute();
             ExitechStateMachine.Fire(ExitechDeviceTriggers.OnOffButtonClick);
-        }
-
-        protected override void TimerHandler(object state)
-        {
-            Log.Debug("Timer tick");
-            Counter++;
-            ExitechDeviceViewModel.BigScreenText = Counter.ToString();
         }
     }
 }

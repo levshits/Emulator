@@ -1,38 +1,36 @@
 ﻿using System;
 using System.Threading;
+using Emulator.Logic.Exitech;
 using Emulator.ViewModel;
 
 namespace Emulator.Logic
 {
     public class ExitechModeHoldButtonCommand: CommandWithDelay
     {
-        public ExitechDeviceViewModel ExitechDeviceViewModel { get; set; }
+        public ExitechStateMachine ExitechStateMachine { get; set; }
 
-        public override bool CanExecute(object parameter)
+        protected override void TimerHandler(object state)
         {
-            return true;
+            base.TimerHandler(state);
+            ExitechStateMachine.Fire(ExitechDeviceTriggers.ModeHoldTimerTick);
         }
 
-        public override void DoPressExecute()
+        public override void DoDoubleClickExecute()
         {
-            base.DoPressExecute();
-            Log.Debug("Execute press");
-            Timer.Change(TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(1));
+            base.DoDoubleClickExecute();
+            ExitechStateMachine.Fire(ExitechDeviceTriggers.ModeHoldDoubleClick);
+        }
+
+        public override void DoClickExecute()
+        {
+            base.DoClickExecute();
+            ExitechStateMachine.Fire(ExitechDeviceTriggers.ModeHoldClick);
         }
 
         public override void DoReleaseExecute()
         {
             base.DoReleaseExecute();
-            ExitechDeviceViewModel.LittleScreenText = "Rel";
-        }
-
-        protected override void TimerHandler(object state)
-        {
-            Log.Debug("Timer tick");
-            Counter++;
-            ExitechDeviceViewModel.TemperatureScale = ExitechDeviceViewModel.TemperatureScale == TemperatureScale.Celsius
-                ? TemperatureScale.Fahrenheit
-                : TemperatureScale.Celsius;
+            ExitechStateMachine.Fire(ExitechDeviceTriggers.ModeHoldRelease);
         }
     }
 }

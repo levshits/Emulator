@@ -3,9 +3,16 @@
     public enum ExitechDeviceTriggers
     {
         OnOffButtonClick,
-        OnOffButtonLongClick,
         OnOffButtonDoubleClick,
+        OnOffTimerTick,
+        Clear,
+        ModeHoldClick,
+        ModeHoldDoubleClick,
+        ModeHoldTimerTick,
+        ModeHoldRelease,
+        CallRecallClick,
+        CallRecallDoubleClick,
+        CallRecallTimerTick,
         TimerTick
-
     }
 }

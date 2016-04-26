@@ -13,11 +13,6 @@
         Ppt,
 
         /// <summary>
-        /// The PPM scale
-        /// </summary>
-        Ppm,
-
-        /// <summary>
         /// The MSCM scale
         /// </summary>
         Mscm

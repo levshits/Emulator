@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Windows;
 using System.Windows.Input;
@@ -14,7 +15,6 @@ namespace Emulator.ViewModel
         private string _littleScreenText;
         private Visibility _calIndicatorVisibility;
         private Visibility _pptIndicatorVisibility;
-        private Visibility _ppmIndicatorVisibility;
         private Visibility _mscmIndicatorVisibility;
         private Visibility _phIndicatorVisibility;
         private HannaScaleMode _mode;
@@ -105,11 +105,6 @@ namespace Emulator.ViewModel
             get { return _pptIndicatorVisibility; }
         }
 
-        public Visibility PpmIndicatorVisibility
-        {
-            get { return _ppmIndicatorVisibility; }
-        }
-
         public Visibility MscmIndicatorVisibility
         {
             get { return _mscmIndicatorVisibility; }
@@ -138,7 +133,6 @@ namespace Emulator.ViewModel
                 {
                     _phIndicatorVisibility = Visibility.Visible;
                     _pptIndicatorVisibility = Visibility.Hidden;
-                    _ppmIndicatorVisibility = Visibility.Hidden;
                     _mscmIndicatorVisibility = Visibility.Hidden;
                 }
                     break;
@@ -146,15 +140,6 @@ namespace Emulator.ViewModel
                 {
                     _phIndicatorVisibility = Visibility.Hidden;
                     _pptIndicatorVisibility = Visibility.Visible;
-                    _ppmIndicatorVisibility = Visibility.Hidden;
-                    _mscmIndicatorVisibility = Visibility.Hidden;
-                }
-                    break;
-                case HannaScaleMode.Ppm:
-                {
-                    _phIndicatorVisibility = Visibility.Hidden;
-                    _pptIndicatorVisibility = Visibility.Hidden;
-                    _ppmIndicatorVisibility = Visibility.Visible;
                     _mscmIndicatorVisibility = Visibility.Hidden;
                 }
                     break;
@@ -162,14 +147,12 @@ namespace Emulator.ViewModel
                 {
                     _phIndicatorVisibility = Visibility.Hidden;
                     _pptIndicatorVisibility = Visibility.Hidden;
-                    _ppmIndicatorVisibility = Visibility.Hidden;
                     _mscmIndicatorVisibility = Visibility.Visible;
                 }
                     break;
             }
             OnPropertyChanged(nameof(PhIndicatorVisibility));
             OnPropertyChanged(nameof(PptIndicatorVisibility));
-            OnPropertyChanged(nameof(PpmIndicatorVisibility));
             OnPropertyChanged(nameof(MscmIndicatorVisibility));
         }
 

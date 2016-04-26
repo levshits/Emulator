@@ -1,30 +1,30 @@
 ﻿using System;
+using Emulator.Logic.Exitech;
 using Emulator.ViewModel;
 
 namespace Emulator.Logic
 {
     public class ExitechCallRecallButtonCommand: CommandWithDelay
     {
-        public ExitechDeviceViewModel ExitechDeviceViewModel { get; set; }
+        public ExitechStateMachine ExitechStateMachine { get; set; }
 
-        public override bool CanExecute(object parameter)
-        {
-            return true;
-        }
-
-        public override void DoReleaseExecute()
-        {
-            base.DoReleaseExecute();
-            Log.Debug("Timer release");
-            Timer.Change(-1, -1);
-            ExitechDeviceViewModel.LittleScreenText = "Rel";
-        }
 
         protected override void TimerHandler(object state)
         {
-            Log.Debug("Timer tick");
-            Counter++;
-            ExitechDeviceViewModel.BigScreenText = Counter.ToString();
+            base.TimerHandler(state);
+            ExitechStateMachine.Fire(ExitechDeviceTriggers.CallRecallTimerTick);
+        }
+
+        public override void DoDoubleClickExecute()
+        {
+            base.DoDoubleClickExecute();
+            ExitechStateMachine.Fire(ExitechDeviceTriggers.CallRecallDoubleClick);
+        }
+
+        public override void DoClickExecute()
+        {
+            base.DoClickExecute();
+            ExitechStateMachine.Fire(ExitechDeviceTriggers.CallRecallClick);
         }
     }
 }

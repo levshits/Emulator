@@ -9,18 +9,17 @@
 
   <!--ExitecModeButtonCommand-->
   <object id="ExitechModeHoldButtonCommand" type="Emulator.Logic.ExitechModeHoldButtonCommand, Emulator">
-    <property name="ExitechDeviceViewModel" ref="ExitechDeviceViewModel" />
+    <property name="ExitechStateMachine" ref="ExitechStateMachine" />
   </object>
 
   <!--ExitecModeButtonCommand-->
   <object id="ExitechOnOffButtonCommand" type="Emulator.Logic.ExitechOnOffButtonCommand, Emulator">
-    <property name="ExitechDeviceViewModel" ref="ExitechDeviceViewModel" />
     <property name="ExitechStateMachine" ref="ExitechStateMachine" />
   </object>
   
   <!--ExitecModeButtonCommand-->
   <object id="ExitechCallRecallButtonCommand" type="Emulator.Logic.ExitechCallRecallButtonCommand, Emulator">
-    <property name="ExitechDeviceViewModel" ref="ExitechDeviceViewModel" />
+    <property name="ExitechStateMachine" ref="ExitechStateMachine" />
   </object>
   
   <!--HannaOnModeButtonCommand-->
