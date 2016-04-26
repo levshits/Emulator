@@ -12,7 +12,19 @@ namespace Emulator.Logic
 
         protected override void TimerHandler(object state)
         {
-            throw new System.NotImplementedException();
+            HannaStateMachine.Fire(HannaDeviceTriggers.OnModeButtonLongClick);
+        }
+
+        public override void DoClickExecute()
+        {
+            base.DoClickExecute();
+            HannaStateMachine.Fire(HannaDeviceTriggers.OnModeButtonClick);
+        }
+
+        public override void DoDoubleClickExecute()
+        {
+            base.DoDoubleClickExecute();
+            HannaStateMachine.Fire(HannaDeviceTriggers.OnModeButtonDoubleClick);
         }
     }
 }

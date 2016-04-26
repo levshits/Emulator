@@ -12,11 +12,14 @@ namespace Emulator.Logic.Hanna
             StateMachine = new StateMachine<HannaDeviceStates, HannaDeviceTriggers>(HannaDeviceStates.Disabled);
             StateMachine.Configure(HannaDeviceStates.Disabled)
                 .OnEntry(HannaDeviceViewModel.EnableDeice)
-                .Permit(HannaDeviceTriggers.OnModeButtonClick, HannaDeviceStates.Enabled);
+                .Permit(HannaDeviceTriggers.OnModeButtonClick, HannaDeviceStates.Enabled)
+                .Ignore(HannaDeviceTriggers.OnModeButtonLongClick);
 
             StateMachine.Configure(HannaDeviceStates.Enabled)
                 .OnEntry(HannaDeviceViewModel.DisableDevice)
-                .Permit(HannaDeviceTriggers.OnModeButtonClick, HannaDeviceStates.Disabled);
+                .Permit(HannaDeviceTriggers.OnModeButtonClick, HannaDeviceStates.Disabled)
+                .Ignore(HannaDeviceTriggers.OnModeButtonLongClick);
+
         }
     }
 }

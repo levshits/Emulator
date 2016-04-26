@@ -13,11 +13,13 @@ namespace Emulator.Logic.Exitec
 
             StateMachine.Configure(ExitecDeviceStates.Disabled)
                 .OnEntry(ExitecDeviceViewModel.EnableDevice)
-                .Permit(ExitecDeviceTriggers.OnOffButtonClick, ExitecDeviceStates.Enabled);
+                .Permit(ExitecDeviceTriggers.OnOffButtonClick, ExitecDeviceStates.Enabled)
+                .Ignore(ExitecDeviceTriggers.OnOffButtonLongClick);
 
             StateMachine.Configure(ExitecDeviceStates.Enabled)
                 .OnEntry(ExitecDeviceViewModel.DisableDevice)
-                .Permit(ExitecDeviceTriggers.OnOffButtonClick, ExitecDeviceStates.Disabled);
+                .Permit(ExitecDeviceTriggers.OnOffButtonClick, ExitecDeviceStates.Disabled)
+                .Ignore(ExitecDeviceTriggers.OnOffButtonLongClick);
         }
     }
 }

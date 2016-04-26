@@ -61,7 +61,7 @@ namespace Emulator.Logic
         public virtual void DoPressExecute()
         {
             Counter = 0;
-            Timer.Change(1, 1);
+            Timer.Change(TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(1));
         }
 
         public virtual void DoReleaseExecute()

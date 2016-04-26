@@ -12,13 +12,6 @@ namespace Emulator.Logic
             return true;
         }
 
-        public override void DoPressExecute()
-        {
-            base.DoPressExecute();
-            Log.Debug("Execute press");
-            Timer.Change(TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(1));
-        }
-
         public override void DoReleaseExecute()
         {
             base.DoReleaseExecute();
