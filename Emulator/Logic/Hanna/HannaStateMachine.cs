@@ -9,7 +9,7 @@ namespace Emulator.Logic.Hanna
     public class HannaStateMachine: DeviceStateMachineBase<HannaDeviceStates, HannaDeviceTriggers>
     {
         protected static readonly ILog Log = LogManager.GetLogger<HannaStateMachine>();
-        public HannaDeviceViewModel HannaDeviceViewModel { get; set; }
+        protected HannaDeviceViewModel HannaDeviceViewModel { get; set; }
         public override void Configure()
         {
             StateMachine = new StateMachine<HannaDeviceStates, HannaDeviceTriggers>(HannaDeviceStates.Disabled);
@@ -26,13 +26,15 @@ namespace Emulator.Logic.Hanna
 
             StateMachine.Configure(HannaDeviceStates.Disabled)
                 .OnEntry(HannaDeviceViewModel.DisableDevice)
-                .Permit(HannaDeviceTriggers.OnModeButtonClick, HannaDeviceStates.Enabled)
-                .Ignore(HannaDeviceTriggers.OnModeButtonLongClick);
+                .Permit(HannaDeviceTriggers.OnModeButtonClick, HannaDeviceStates.Loading);
+            
+            StateMachine.Configure(HannaDeviceStates.Loading)
+                .OnEntry(HannaDeviceViewModel.Initialize)
+                .Permit(HannaDeviceTriggers.TimerTick, HannaDeviceStates.Enabled);
 
             StateMachine.Configure(HannaDeviceStates.Enabled)
                 .OnEntry(HannaDeviceViewModel.EnableDevice)
-                .Permit(HannaDeviceTriggers.OnModeButtonClick, HannaDeviceStates.Disabled)
-                .Ignore(HannaDeviceTriggers.OnModeButtonLongClick);
+                .Permit(HannaDeviceTriggers.OnModeButtonClick, HannaDeviceStates.Disabled);
 
         }
     }

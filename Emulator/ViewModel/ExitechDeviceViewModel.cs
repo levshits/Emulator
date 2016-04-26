@@ -1,7 +1,9 @@
 ﻿using System.Globalization;
+using System.Threading;
 using System.Windows;
 using System.Windows.Input;
 using Emulator.Logic;
+using Emulator.Logic.Exitech;
 
 namespace Emulator.ViewModel
 {
@@ -19,6 +21,7 @@ namespace Emulator.ViewModel
         public ICommand ExitechModeHoldButtonCommand { get; set; }
         public ICommand ExitechCallRecallButtonCommand { get; set; }
         public ICommand ExitechOnOffButtonCommand { get; set; }
+        public ExitechStateMachine ExitechStateMachine { get; set; }
 
         public void OnInit()
         {
@@ -29,7 +32,8 @@ namespace Emulator.ViewModel
             DeviceScreenVisibility = Visibility.Hidden;
             HistogramScale = "%";
         }
-#region Properties
+
+        #region Properties
 
         public TemperatureScale TemperatureScale
         {
@@ -43,8 +47,9 @@ namespace Emulator.ViewModel
             }
         }
 
-        public Visibility FahrengeitIndicatorVisibility {
-            get { return TemperatureScale == TemperatureScale.Fahrenheit? Visibility.Visible : Visibility.Hidden; }
+        public Visibility FahrengeitIndicatorVisibility
+        {
+            get { return TemperatureScale == TemperatureScale.Fahrenheit ? Visibility.Visible : Visibility.Hidden; }
             set
             {
                 TemperatureScale = value == Visibility.Visible ? TemperatureScale.Fahrenheit : TemperatureScale.Celsius;
@@ -54,7 +59,11 @@ namespace Emulator.ViewModel
 
         public Visibility CelsiusIndicatorVisibility
         {
-            get { return TemperatureScale == TemperatureScale.Celsius ? Visibility.Visible : Visibility.Hidden; ; }
+            get
+            {
+                return TemperatureScale == TemperatureScale.Celsius ? Visibility.Visible : Visibility.Hidden;
+                ;
+            }
             set
             {
                 TemperatureScale = value == Visibility.Visible ? TemperatureScale.Celsius : TemperatureScale.Fahrenheit;
@@ -91,11 +100,12 @@ namespace Emulator.ViewModel
             get { return _histogramMinValue; }
             set
             {
-                _histogramMinValue = value; 
+                _histogramMinValue = value;
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(HistogramMinLabel));
             }
         }
+
         public string HistogramMinLabel => _histogramMinValue.ToString(CultureInfo.InvariantCulture);
 
         public decimal HistogramMaxValue
@@ -108,6 +118,7 @@ namespace Emulator.ViewModel
                 OnPropertyChanged(nameof(HistogramMaxLabel));
             }
         }
+
         public string HistogramMaxLabel => _histogramMaxValue.ToString(CultureInfo.InvariantCulture);
 
         public decimal HistorgamValue
@@ -115,7 +126,7 @@ namespace Emulator.ViewModel
             get { return _historgamValue; }
             set
             {
-                _historgamValue = value; 
+                _historgamValue = value;
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(HistorgamValueToBind));
             }
@@ -132,7 +143,7 @@ namespace Emulator.ViewModel
             get { return _histogramScale; }
             set
             {
-                _histogramScale = value; 
+                _histogramScale = value;
                 OnPropertyChanged();
             }
         }
@@ -142,12 +153,14 @@ namespace Emulator.ViewModel
             get { return _deviceScreenVisibility; }
             set
             {
-                _deviceScreenVisibility = value; 
+                _deviceScreenVisibility = value;
                 OnPropertyChanged();
             }
         }
+
         #endregion Properties
-#region Actions
+
+        #region Actions
 
         public void EnableDevice()
         {
@@ -158,6 +171,14 @@ namespace Emulator.ViewModel
         {
             DeviceScreenVisibility = Visibility.Hidden;
         }
-#endregion Actions
+
+        public void Initialize()
+        {
+            BigScreenText = "Init";
+            Thread.Sleep(500);
+            ExitechStateMachine.Fire(ExitechDeviceTriggers.TimerTick);
+        }
+
+        #endregion Actions
     }
 }

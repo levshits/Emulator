@@ -4,6 +4,7 @@
     {
          OnModeButtonClick,
          OnModeButtonLongClick,
-         OnModeButtonDoubleClick
+         OnModeButtonDoubleClick,
+         TimerTick
     }
 }

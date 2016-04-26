@@ -4,7 +4,8 @@
     {
         OnOffButtonClick,
         OnOffButtonLongClick,
-        OnOffButtonDoubleClick
+        OnOffButtonDoubleClick,
+        TimerTick
 
     }
 }

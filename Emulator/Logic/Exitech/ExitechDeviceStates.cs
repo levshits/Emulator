@@ -3,6 +3,7 @@
     public enum ExitechDeviceStates
     {
         Enabled,
+        Loading,
         Disabled
     }
 }

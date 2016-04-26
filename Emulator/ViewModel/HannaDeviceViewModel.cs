@@ -1,5 +1,8 @@
-﻿using System.Windows;
+﻿using System;
+using System.Threading;
+using System.Windows;
 using System.Windows.Input;
+using Emulator.Logic.Hanna;
 using Emulator.Model;
 
 namespace Emulator.ViewModel
@@ -19,6 +22,7 @@ namespace Emulator.ViewModel
         public string DeviceName => "Hanna";
         public ICommand HannaOnModeButtonCommand { get; set; }
         public ICommand HannaSetHoldButtonCommand { get; set; }
+        public HannaStateMachine HannaStateMachine { get; set; }
 
         public void OnInit()
         {
@@ -191,6 +195,12 @@ namespace Emulator.ViewModel
         public void DisableDevice()
         {
             DeviceScreenVisibility = Visibility.Hidden;
+        }
+        public void Initialize()
+        {
+            BigScreenText = "Init";
+            Thread.Sleep(500);
+            HannaStateMachine.Fire(HannaDeviceTriggers.TimerTick);
         }
 
         #endregion Actions

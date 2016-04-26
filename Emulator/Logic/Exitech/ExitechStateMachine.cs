@@ -8,7 +8,7 @@ namespace Emulator.Logic.Exitech
     public class ExitechStateMachine: DeviceStateMachineBase<ExitechDeviceStates, ExitechDeviceTriggers>
     {
         protected static readonly ILog Log = LogManager.GetLogger<ExitechStateMachine>();
-        public ExitechDeviceViewModel ExitechDeviceViewModel { get; set; }
+        protected ExitechDeviceViewModel ExitechDeviceViewModel { get; set; }
         public override void Configure()
         {
             StateMachine = new StateMachine<ExitechDeviceStates, ExitechDeviceTriggers>(ExitechDeviceStates.Disabled);
@@ -25,13 +25,15 @@ namespace Emulator.Logic.Exitech
 
             StateMachine.Configure(ExitechDeviceStates.Disabled)
                 .OnEntry(ExitechDeviceViewModel.DisableDevice)
-                .Permit(ExitechDeviceTriggers.OnOffButtonClick, ExitechDeviceStates.Enabled)
-                .Ignore(ExitechDeviceTriggers.OnOffButtonLongClick);
+                .Permit(ExitechDeviceTriggers.OnOffButtonClick, ExitechDeviceStates.Loading);
+
+            StateMachine.Configure(ExitechDeviceStates.Loading)
+                .OnEntry(ExitechDeviceViewModel.Initialize)
+                .Permit(ExitechDeviceTriggers.TimerTick, ExitechDeviceStates.Enabled);
 
             StateMachine.Configure(ExitechDeviceStates.Enabled)
                 .OnEntry(ExitechDeviceViewModel.EnableDevice)
-                .Permit(ExitechDeviceTriggers.OnOffButtonClick, ExitechDeviceStates.Disabled)
-                .Ignore(ExitechDeviceTriggers.OnOffButtonLongClick);
+                .Permit(ExitechDeviceTriggers.OnOffButtonClick, ExitechDeviceStates.Disabled);
 
         }
     }

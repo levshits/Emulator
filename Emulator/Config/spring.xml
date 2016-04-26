@@ -16,10 +16,12 @@
     <property name="ExitechModeHoldButtonCommand" ref="ExitechModeHoldButtonCommand"/>
     <property name="ExitechCallRecallButtonCommand" ref="ExitechCallRecallButtonCommand"/>
     <property name="ExitechOnOffButtonCommand" ref="ExitechOnOffButtonCommand"/>
+    <property name="ExitechStateMachine" ref="ExitechStateMachine" />
   </object>
 
   <object id="HannaDeviceViewModel" type="Emulator.ViewModel.HannaDeviceViewModel, Emulator" singleton="true" init-method="OnInit">
     <property name="HannaOnModeButtonCommand" ref="HannaOnModeButtonCommand"/>
     <property name="HannaSetHoldButtonCommand" ref="HannaSetHoldButtonCommand"/>
+    <property name="HannaStateMachine" ref="HannaStateMachine" />
   </object>
 </objects>
