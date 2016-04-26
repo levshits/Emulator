@@ -190,7 +190,7 @@
                 <Grid>
                     <Image x:Name="___Emulator_component_21_01_png" Margin="-133.545,-27,-137,199.058"
                            Source="/Emulator;component/21-01.png" Stretch="Fill" />
-                    <Grid Height="82.5" Margin="98,88.446,93,0" VerticalAlignment="Top">
+                    <Grid Height="82.5" Margin="98,88.446,93,0" VerticalAlignment="Top" Visibility="{Binding DeviceScreenVisibility}">
                         <TextBlock TextAlignment="Right" HorizontalAlignment="Right" Margin="29.28,19.333,10,30.667"
                                    TextWrapping="Wrap" Text="{Binding BigScreenText}" FontFamily="Ticking Timebomb BB"
                                    FontSize="40" Width="Auto" d:LayoutOverrides="Width" d:IsLocked="True" />
@@ -232,11 +232,11 @@
                         <TextBlock TextAlignment="Right" HorizontalAlignment="Left" Margin="1.5,0,0,13"
                                    TextWrapping="Wrap" Text="Cal" FontFamily="Ticking Timebomb BB" FontSize="9.333"
                                    Width="16.054" Height="8.834" VerticalAlignment="Bottom"
-                                   RenderTransformOrigin="0.817,1.358" />
+                                   RenderTransformOrigin="0.817,1.358"  Visibility="{Binding CalIndicatorVisibility}"/>
                         <TextBlock TextAlignment="Right" HorizontalAlignment="Left" Margin="6.004,0,0,30.667"
                                    TextWrapping="Wrap" Text="%" FontFamily="Ticking Timebomb BB" FontSize="9.333"
                                    Width="10.054" Height="9.667" VerticalAlignment="Bottom"
-                                   RenderTransformOrigin="0.817,1.358" />
+                                   RenderTransformOrigin="0.817,1.358" Visibility="Hidden"/>
                     </Grid>
                     <StackPanel Height="33" Margin="114,206.446,109,0" Orientation="Horizontal" VerticalAlignment="Top"
                                 d:LayoutOverrides="Width">
@@ -245,20 +245,20 @@
                                 Width="32.5" >
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="PreviewMouseDown">
-                                    <command:EventToCommand Command="{Binding ExitecModeHoldButtonCommand}"
-                                                                CommandParameter="{Binding Source={x:Static model:DelayedCommandEvents.MouseDown}}" />
+                                    <command:EventToCommand Command="{Binding HannaOnModeButtonCommand}"
+                                            CommandParameter="{Binding Source={x:Static model:DelayedCommandEvents.MouseDown}}" />
                                 </i:EventTrigger>
                                 <i:EventTrigger EventName="PreviewMouseUp">
-                                    <command:EventToCommand Command="{Binding ExitecModeHoldButtonCommand}"
-                                                                CommandParameter="{Binding Source={x:Static model:DelayedCommandEvents.MouseUp}}" />
+                                    <command:EventToCommand Command="{Binding HannaOnModeButtonCommand}"
+                                            CommandParameter="{Binding Source={x:Static model:DelayedCommandEvents.MouseUp}}" />
                                 </i:EventTrigger>
                                 <i:EventTrigger EventName="Click">
-                                    <command:EventToCommand Command="{Binding ExitecModeHoldButtonCommand}"
-                                                                CommandParameter="{Binding Source={x:Static model:DelayedCommandEvents.Click}}" />
+                                    <command:EventToCommand Command="{Binding HannaOnModeButtonCommand}"
+                                            CommandParameter="{Binding Source={x:Static model:DelayedCommandEvents.Click}}" />
                                 </i:EventTrigger>
                                 <i:EventTrigger EventName="MouseDoubleClick">
-                                    <command:EventToCommand Command="{Binding ExitecModeHoldButtonCommand}"
-                                                                CommandParameter="{Binding Source={x:Static model:DelayedCommandEvents.DoubleClick}}" />
+                                    <command:EventToCommand Command="{Binding HannaOnModeButtonCommand}"
+                                            CommandParameter="{Binding Source={x:Static model:DelayedCommandEvents.DoubleClick}}" />
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
@@ -267,20 +267,20 @@
                                 Width="32.5">
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="PreviewMouseDown">
-                                    <command:EventToCommand Command="{Binding ExitecModeHoldButtonCommand}"
-                                                                CommandParameter="{Binding Source={x:Static model:DelayedCommandEvents.MouseDown}}" />
+                                    <command:EventToCommand Command="{Binding HannaSetHoldButtonCommand}"
+                                                CommandParameter="{Binding Source={x:Static model:DelayedCommandEvents.MouseDown}}" />
                                 </i:EventTrigger>
                                 <i:EventTrigger EventName="PreviewMouseUp">
-                                    <command:EventToCommand Command="{Binding ExitecModeHoldButtonCommand}"
-                                                                CommandParameter="{Binding Source={x:Static model:DelayedCommandEvents.MouseUp}}" />
+                                    <command:EventToCommand Command="{Binding HannaSetHoldButtonCommand}"
+                                                CommandParameter="{Binding Source={x:Static model:DelayedCommandEvents.MouseUp}}" />
                                 </i:EventTrigger>
                                 <i:EventTrigger EventName="Click">
-                                    <command:EventToCommand Command="{Binding ExitecModeHoldButtonCommand}"
-                                                                CommandParameter="{Binding Source={x:Static model:DelayedCommandEvents.Click}}" />
+                                    <command:EventToCommand Command="{Binding HannaSetHoldButtonCommand}"
+                                                CommandParameter="{Binding Source={x:Static model:DelayedCommandEvents.Click}}" />
                                 </i:EventTrigger>
                                 <i:EventTrigger EventName="MouseDoubleClick">
-                                    <command:EventToCommand Command="{Binding ExitecModeHoldButtonCommand}"
-                                                                CommandParameter="{Binding Source={x:Static model:DelayedCommandEvents.DoubleClick}}" />
+                                    <command:EventToCommand Command="{Binding HannaSetHoldButtonCommand}"
+                                                CommandParameter="{Binding Source={x:Static model:DelayedCommandEvents.DoubleClick}}" />
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>

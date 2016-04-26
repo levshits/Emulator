@@ -1,9 +1,10 @@
 ﻿using System.Windows;
+using System.Windows.Input;
 using Emulator.Model;
 
 namespace Emulator.ViewModel
 {
-    public class HannaDeviceViewModel: ViewModelBase, IDeviceViewModel
+    public class HannaDeviceViewModel : ViewModelBase, IDeviceViewModel
     {
         private TemperatureScale _temperatureScale;
         private string _bigScreenText;
@@ -14,14 +15,20 @@ namespace Emulator.ViewModel
         private Visibility _mscmIndicatorVisibility;
         private Visibility _phIndicatorVisibility;
         private HannaScaleMode _mode;
+        private Visibility _deviceScreenVisibility;
         public string DeviceName => "Hanna";
+        public ICommand HannaOnModeButtonCommand { get; set; }
+        public ICommand HannaSetHoldButtonCommand { get; set; }
 
         public void OnInit()
         {
+            DeviceScreenVisibility = Visibility.Hidden;
             LittleScreenText = 100.ToString();
             BigScreenText = 200.ToString();
             Mode = HannaScaleMode.Ph;
         }
+
+        #region Properties
 
         public TemperatureScale TemperatureScale
         {
@@ -47,7 +54,11 @@ namespace Emulator.ViewModel
 
         public Visibility CelsiusIndicatorVisibility
         {
-            get { return TemperatureScale == TemperatureScale.Celsius ? Visibility.Visible : Visibility.Hidden; ; }
+            get
+            {
+                return TemperatureScale == TemperatureScale.Celsius ? Visibility.Visible : Visibility.Hidden;
+                ;
+            }
             set
             {
                 TemperatureScale = value == Visibility.Visible ? TemperatureScale.Celsius : TemperatureScale.Fahrenheit;
@@ -80,7 +91,7 @@ namespace Emulator.ViewModel
             get { return _calIndicatorVisibility; }
             set
             {
-                _calIndicatorVisibility = value; 
+                _calIndicatorVisibility = value;
                 OnPropertyChanged();
             }
         }
@@ -119,44 +130,69 @@ namespace Emulator.ViewModel
         {
             switch (Mode)
             {
-                 case HannaScaleMode.Ph:
+                case HannaScaleMode.Ph:
                 {
                     _phIndicatorVisibility = Visibility.Visible;
-                        _pptIndicatorVisibility = Visibility.Hidden;
-                        _ppmIndicatorVisibility = Visibility.Hidden;
-                        _mscmIndicatorVisibility = Visibility.Hidden;
+                    _pptIndicatorVisibility = Visibility.Hidden;
+                    _ppmIndicatorVisibility = Visibility.Hidden;
+                    _mscmIndicatorVisibility = Visibility.Hidden;
                 }
                     break;
                 case HannaScaleMode.Ppt:
-                    {
-                        _phIndicatorVisibility = Visibility.Hidden;
-                        _pptIndicatorVisibility = Visibility.Visible;
-                        _ppmIndicatorVisibility = Visibility.Hidden;
-                        _mscmIndicatorVisibility = Visibility.Hidden;
-                    }
+                {
+                    _phIndicatorVisibility = Visibility.Hidden;
+                    _pptIndicatorVisibility = Visibility.Visible;
+                    _ppmIndicatorVisibility = Visibility.Hidden;
+                    _mscmIndicatorVisibility = Visibility.Hidden;
+                }
                     break;
                 case HannaScaleMode.Ppm:
-                    {
-                        _phIndicatorVisibility = Visibility.Hidden;
-                        _pptIndicatorVisibility = Visibility.Hidden;
-                        _ppmIndicatorVisibility = Visibility.Visible;
-                        _mscmIndicatorVisibility = Visibility.Hidden;
-                    }
+                {
+                    _phIndicatorVisibility = Visibility.Hidden;
+                    _pptIndicatorVisibility = Visibility.Hidden;
+                    _ppmIndicatorVisibility = Visibility.Visible;
+                    _mscmIndicatorVisibility = Visibility.Hidden;
+                }
                     break;
                 case HannaScaleMode.Mscm:
-                    {
-                        _phIndicatorVisibility = Visibility.Hidden;
-                        _pptIndicatorVisibility = Visibility.Hidden;
-                        _ppmIndicatorVisibility = Visibility.Hidden;
-                        _mscmIndicatorVisibility = Visibility.Visible;
-                    }
+                {
+                    _phIndicatorVisibility = Visibility.Hidden;
+                    _pptIndicatorVisibility = Visibility.Hidden;
+                    _ppmIndicatorVisibility = Visibility.Hidden;
+                    _mscmIndicatorVisibility = Visibility.Visible;
+                }
                     break;
-
             }
             OnPropertyChanged(nameof(PhIndicatorVisibility));
             OnPropertyChanged(nameof(PptIndicatorVisibility));
             OnPropertyChanged(nameof(PpmIndicatorVisibility));
             OnPropertyChanged(nameof(MscmIndicatorVisibility));
         }
+
+        public Visibility DeviceScreenVisibility
+        {
+            get { return _deviceScreenVisibility; }
+            set
+            {
+                _deviceScreenVisibility = value;
+                OnPropertyChanged();
+            }
+        }
+
+        #endregion Properties
+
+        #region Actions
+
+        public void EnableDeice()
+        {
+            DeviceScreenVisibility = Visibility.Visible;
+        }
+
+        public void DisableDevice()
+        {
+            DeviceScreenVisibility = Visibility.Hidden;
+        }
+
+        #endregion Actions
     }
 }

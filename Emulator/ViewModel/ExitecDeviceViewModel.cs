@@ -29,6 +29,7 @@ namespace Emulator.ViewModel
             DeviceScreenVisibility = Visibility.Hidden;
             HistogramScale = "%";
         }
+#region Properties
 
         public TemperatureScale TemperatureScale
         {
@@ -145,5 +146,18 @@ namespace Emulator.ViewModel
                 OnPropertyChanged();
             }
         }
+        #endregion Properties
+#region Actions
+
+        public void EnableDevice()
+        {
+            DeviceScreenVisibility = Visibility.Visible;
+        }
+
+        public void DisableDevice()
+        {
+            DeviceScreenVisibility = Visibility.Hidden;
+        }
+#endregion Actions
     }
 }

@@ -2,6 +2,7 @@
 <objects xmlns="http://www.springframework.net">
   <import resource="command.xml" />
   <import resource="data.xml"/>
+  <import resource="logic.xml"/>
 
   <object id="MainViewModel" type="Emulator.ViewModel.MainViewModel, Emulator" singleton="true" init-method="OnInit">
     <constructor-arg name="dataProvider" ref="IDataProvider"/>
@@ -18,5 +19,7 @@
   </object>
 
   <object id="HannaDeviceViewModel" type="Emulator.ViewModel.HannaDeviceViewModel, Emulator" singleton="true" init-method="OnInit">
+    <property name="HannaOnModeButtonCommand" ref="HannaOnModeButtonCommand"/>
+    <property name="HannaSetHoldButtonCommand" ref="HannaSetHoldButtonCommand"/>
   </object>
 </objects>

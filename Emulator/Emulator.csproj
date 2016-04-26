@@ -84,6 +84,10 @@
       <HintPath>..\packages\Spring.Core.2.0.1\lib\net45\Spring.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Stateless, Version=2.5.62.0, Culture=neutral, PublicKeyToken=93038f0927583c9a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Stateless.2.5.62.0\lib\portable-net40+sl50+win+wp80+MonoAndroid10+xamarinios10+MonoTouch10\Stateless.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -126,8 +130,14 @@
     <Compile Include="Logic\ExitecCallRecallButtonCommand.cs" />
     <Compile Include="Logic\ExitecModeHoldButtonCommand.cs" />
     <Compile Include="Logic\ExitecOnOffButtonCommand.cs" />
+    <Compile Include="Logic\Exitec\ExitecDeviceStates.cs" />
+    <Compile Include="Logic\Exitec\ExitecDeviceTriggers.cs" />
+    <Compile Include="Logic\Exitec\ExitecStateMachine.cs" />
     <Compile Include="Logic\HannaOnModeButtonCommand.cs" />
-    <Compile Include="Logic\HannaSetHoldButtonClick.cs" />
+    <Compile Include="Logic\HannaSetHoldButtonCommand.cs" />
+    <Compile Include="Logic\Hanna\HannaDeviceStates.cs" />
+    <Compile Include="Logic\Hanna\HannaDeviceTriggers.cs" />
+    <Compile Include="Logic\Hanna\HannaStateMachine.cs" />
     <Compile Include="Logic\ResetCommand.cs" />
     <Compile Include="Model\DelayedCommandEvents.cs" />
     <Compile Include="Model\HannaScaleMode.cs" />
@@ -148,6 +158,9 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Content Include="Config\Logic.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Config\Data.xls">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using Emulator.Logic.Exitec;
 using Emulator.ViewModel;
 
 namespace Emulator.Logic
@@ -7,11 +8,7 @@ namespace Emulator.Logic
     public class ExitecOnOffButtonCommand: CommandWithDelay
     {
         public ExitecDeviceViewModel ExitecDeviceViewModel { get; set; }
-
-        public override bool CanExecute(object parameter)
-        {
-            return true;
-        }
+        public ExitecStateMachine ExitecStateMachine { get; set; }
 
         public override void DoPressExecute()
         {
@@ -28,7 +25,7 @@ namespace Emulator.Logic
 
         public override void DoClickExecute()
         {
-            ExitecDeviceViewModel.DeviceScreenVisibility = Visibility.Visible;
+            ExitecStateMachine.Fire(ExitecDeviceTriggers.OnOffButtonClick);
         }
 
         protected override void TimerHandler(object state)

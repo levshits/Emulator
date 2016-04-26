@@ -9,9 +9,13 @@ namespace Emulator.Logic
     public abstract class CommandWithDelay : ICommand
     {
         protected static readonly ILog Log = LogManager.GetLogger<CommandWithDelay>();
-        public abstract bool CanExecute(object parameter);
         public Timer Timer { get; set; }
         public int Counter { get; set; }
+
+        public virtual bool CanExecute(object parameter)
+        {
+            return true;
+        }
 
         protected CommandWithDelay()
         {
@@ -57,11 +61,11 @@ namespace Emulator.Logic
         public virtual void DoPressExecute()
         {
             Counter = 0;
+            Timer.Change(1, 1);
         }
 
         public virtual void DoReleaseExecute()
         {
-            Log.Debug("Timer release");
             Timer.Change(-1, -1);
         }
 

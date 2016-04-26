@@ -15,11 +15,22 @@
   <!--ExitecModeButtonCommand-->
   <object id="ExitecOnOffButtonCommand" type="Emulator.Logic.ExitecOnOffButtonCommand, Emulator">
     <property name="ExitecDeviceViewModel" ref="ExitecDeviceViewModel" />
+    <property name="ExitecStateMachine" ref="ExitecStateMachine" />
   </object>
   
   <!--ExitecModeButtonCommand-->
   <object id="ExitecCallRecallButtonCommand" type="Emulator.Logic.ExitecCallRecallButtonCommand, Emulator">
     <property name="ExitecDeviceViewModel" ref="ExitecDeviceViewModel" />
+  </object>
+  
+  <!--HannaOnModeButtonCommand-->
+  <object id="HannaOnModeButtonCommand" type="Emulator.Logic.HannaOnModeButtonCommand, Emulator">
+    <property name="HannaStateMachine" ref="HannaStateMachine" />
+  </object>
+  
+  <!--HannaOnModeButtonCommand-->
+  <object id="HannaSetHoldButtonCommand" type="Emulator.Logic.HannaSetHoldButtonCommand, Emulator">
+    <property name="HannaStateMachine" ref="HannaStateMachine" />
   </object>
 
 <!--ApplyFilterCommand-->

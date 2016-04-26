@@ -1,7 +1,10 @@
-﻿namespace Emulator.Logic
+﻿using Emulator.Logic.Hanna;
+
+namespace Emulator.Logic
 {
     public class HannaOnModeButtonCommand: CommandWithDelay
     {
+        public HannaStateMachine HannaStateMachine { get; set; }
         public override bool CanExecute(object parameter)
         {
             return true;
