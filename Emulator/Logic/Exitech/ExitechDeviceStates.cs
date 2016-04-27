@@ -10,6 +10,7 @@
         History,
         Clear,
         Measure,
-        MeasureSetting
+        MeasureSetting,
+        TemperatureSetting
     }
 }

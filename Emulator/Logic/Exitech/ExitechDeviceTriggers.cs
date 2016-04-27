@@ -11,8 +11,10 @@
         ModeHoldTimerTick,
         ModeHoldRelease,
         CallRecallClick,
+        CallRecallRelease,
         CallRecallDoubleClick,
         CallRecallTimerTick,
-        TimerTick
+        TimerTick,
+        DataChanged
     }
 }

@@ -8,5 +8,6 @@
         public double OxygenCoefficient { get; set; }
         public double ConductivityCoefficient { get; set; }
         public double PhCoefficient { get; set; }
+        public double TemperatureCoefficient { get; set; }
     }
 }

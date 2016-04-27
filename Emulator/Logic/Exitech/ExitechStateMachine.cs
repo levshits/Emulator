@@ -33,11 +33,13 @@ namespace Emulator.Logic.Exitech
             StateMachine.Configure(ExitechDeviceStates.Measure)
                 .SubstateOf(ExitechDeviceStates.Enabled)
                 .OnEntry(ExitechDeviceViewModel.EnableDevice)
+                .PermitReentry(ExitechDeviceTriggers.DataChanged)
                 .Permit(ExitechDeviceTriggers.OnOffButtonClick, ExitechDeviceStates.Disabled)
                 .Permit(ExitechDeviceTriggers.ModeHoldClick, ExitechDeviceStates.Hold)
                 .Permit(ExitechDeviceTriggers.Clear, ExitechDeviceStates.Clear)
                 .Permit(ExitechDeviceTriggers.ModeHoldTimerTick, ExitechDeviceStates.MeasureSetting)
-                .Permit(ExitechDeviceTriggers.CallRecallClick, ExitechDeviceStates.History);
+                .Permit(ExitechDeviceTriggers.CallRecallClick, ExitechDeviceStates.History)
+                .Permit(ExitechDeviceTriggers.CallRecallTimerTick, ExitechDeviceStates.TemperatureSetting);
 
             StateMachine.Configure(ExitechDeviceStates.Clear)
                 .SubstateOf(ExitechDeviceStates.Enabled)
@@ -69,6 +71,14 @@ namespace Emulator.Logic.Exitech
                 .Permit(ExitechDeviceTriggers.OnOffButtonClick, ExitechDeviceStates.Disabled)
                 .Permit(ExitechDeviceTriggers.Clear, ExitechDeviceStates.Clear);
 
+            StateMachine.Configure(ExitechDeviceStates.TemperatureSetting)
+                .SubstateOf(ExitechDeviceStates.Enabled)
+                .OnEntry(ExitechDeviceViewModel.OnTemperatureSettingEntry)
+                .OnExit(async () => await ExitechDeviceViewModel.OnHistoryExit())
+                .PermitReentry(ExitechDeviceTriggers.CallRecallTimerTick)
+                .Permit(ExitechDeviceTriggers.CallRecallRelease, ExitechDeviceStates.Measure)
+                .Permit(ExitechDeviceTriggers.OnOffButtonClick, ExitechDeviceStates.Disabled)
+                .Permit(ExitechDeviceTriggers.Clear, ExitechDeviceStates.Clear);
         }
     }
 }

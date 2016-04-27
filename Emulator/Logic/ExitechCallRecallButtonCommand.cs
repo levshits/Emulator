@@ -26,5 +26,11 @@ namespace Emulator.Logic
             base.DoClickExecute();
             ExitechStateMachine.Fire(ExitechDeviceTriggers.CallRecallClick);
         }
+
+        public override void DoReleaseExecute()
+        {
+            base.DoReleaseExecute();
+            ExitechStateMachine.Fire(ExitechDeviceTriggers.CallRecallRelease);
+        }
     }
 }

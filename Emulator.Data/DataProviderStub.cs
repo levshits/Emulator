@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Common.Logging;
 using Emulator.Common.Interfaces;
 using Emulator.Common.Models;
@@ -8,6 +9,10 @@ namespace Emulator.Data
     public class DataProviderStub: IDataProvider
     {
         private static readonly ILog Log = LogManager.GetLogger<IDataProvider>();
+        public void ApplyFilter(FilterModel filter)
+        {
+        }
+
         public void Reset(VariantModel model)
         {
             Log.Debug("Reset data implemented");
@@ -29,6 +34,12 @@ namespace Emulator.Data
 
         public void OnInit()
         {
+        }
+
+        public event EventHandler DataChanged;
+        public VariantModel GetData()
+        {
+            throw new NotImplementedException();
         }
     }
 }

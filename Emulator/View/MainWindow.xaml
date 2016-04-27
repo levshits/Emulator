@@ -56,7 +56,7 @@
                     </Grid>
                 </materialDesign:Card>
             </DataTemplate>
-            <DataTemplate x:Key="Template" DataType="{x:Type viewModel:ExitechDeviceViewModel}">
+            <DataTemplate DataType="{x:Type viewModel:ExitechDeviceViewModel}">
                 <Grid>
                     <Grid Margin="-135,-68,-157.05,134">
                         <Image x:Name="___Emulator_component_01_01_png" Margin="0,10,0,-10"
@@ -302,7 +302,7 @@
                         <ToggleButton Content="ToggleButton" IsChecked="{Binding IsExitecSelected}" />
                     </StackPanel>
                     <ScrollViewer Height="571" VerticalScrollBarVisibility="Disabled" Margin="0,10,0,0">
-                        <ContentControl Content="{Binding DeviceModel}" ContentTemplate="{DynamicResource Template}" Height="913" Width="302" />
+                        <ContentControl Content="{Binding DeviceModel}" Height="913" Width="302" />
                     </ScrollViewer>
                 </StackPanel>
             </Grid>
@@ -316,7 +316,7 @@
                                       DisplayMemberPath="Name"
                                       SelectedValuePath="Id" SelectedIndex="0" IsSynchronizedWithCurrentItem="False">
                                 <i:Interaction.Triggers>
-                                    <i:EventTrigger EventName="PreviewMouseDown">
+                                    <i:EventTrigger EventName="SelectionChanged">
                                         <command:EventToCommand Command="{Binding ResetCommand}" CommandParameter="{Binding Source={x:Static model:DelayedCommandEvents.MouseDown}}" />
                                     </i:EventTrigger>
                                 </i:Interaction.Triggers>

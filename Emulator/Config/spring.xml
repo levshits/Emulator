@@ -17,6 +17,7 @@
     <property name="ExitechCallRecallButtonCommand" ref="ExitechCallRecallButtonCommand"/>
     <property name="ExitechOnOffButtonCommand" ref="ExitechOnOffButtonCommand"/>
     <property name="ExitechStateMachine" ref="ExitechStateMachine" />
+    <property name="DataProvider" ref="IDataProvider" />
   </object>
 
   <object id="HannaDeviceViewModel" type="Emulator.ViewModel.HannaDeviceViewModel, Emulator" singleton="true" init-method="OnInit">

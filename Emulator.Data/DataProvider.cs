@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using Common.Logging;
 using Emulator.Common.Interfaces;
@@ -14,18 +15,34 @@ namespace Emulator.Data
 {
     public class DataProvider: IDataProvider
     {
+        private VariantModel _data;
         private List<FilterModel> _filters = new List<FilterModel>();
         private List<VariantModel> _variants = new List<VariantModel>();
         protected static readonly ILog Log = LogManager.GetLogger<IDataProvider>();
         
-        private const string DATA_FILE = @"./Config/Data.xls"; 
+        private const string DATA_FILE = @"./Config/Data.xls";
+        public void ApplyFilter(FilterModel filter)
+        {
+            _data.Temperature = _data.Temperature*filter.TemperatureCoefficient;
+            _data.Oxygen = _data.Oxygen * filter.OxygenCoefficient;
+            _data.Conductivity = _data.Conductivity * filter.ConductivityCoefficient;
+            _data.Ph = _data.Ph * filter.PhCoefficient;
+            DataChanged?.Invoke(this, null);
+        }
+
         public void Reset(VariantModel variant)
         {
+            if (variant == null)
+            {
+                throw new ArgumentNullException(nameof(variant));
+            }
+            _data = variant.CreateCopy();
+            DataChanged?.Invoke(this, null);
         }
 
         public List<VariantModel> GetVariants()
         {
-            return _variants;
+            return _variants.Select(x=>x.CreateCopy()).ToList();
         }
 
         public List<FilterModel> GetFilters()
@@ -45,12 +62,23 @@ namespace Emulator.Data
                 }
                 _filters = LoadSheet<FilterModel>("Filters", wb);
                 _variants = LoadSheet<VariantModel>("Variants", wb);
+                if (!_variants.Any())
+                {
+                    throw new ArgumentException("Variants sheet should not be empty");
+                }
+                _data = _variants.First().CreateCopy();
             }
             catch (Exception e)
             {
                 Log.Error("Initialization exception", e);
                 throw;
             }
+        }
+
+        public event EventHandler DataChanged;
+        public VariantModel GetData()
+        {
+            return _data.CreateCopy();
         }
 
         static List<T> LoadSheet<T>(string sheetName, IWorkbook wb) where T : new()

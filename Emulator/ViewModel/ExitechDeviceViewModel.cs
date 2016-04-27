@@ -6,6 +6,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using Emulator.Common.Interfaces;
+using Emulator.Data;
 using Emulator.Logic;
 using Emulator.Logic.Exitech;
 
@@ -32,17 +34,20 @@ namespace Emulator.ViewModel
         public ICommand ExitechCallRecallButtonCommand { get; set; }
         public ICommand ExitechOnOffButtonCommand { get; set; }
         public ExitechStateMachine ExitechStateMachine { get; set; }
+        public IDataProvider DataProvider { get; set; }
 
         public void OnInit()
         {
             TemperatureScale = TemperatureScale.Celsius;
             HistogramMinValue = 0;
-            HistogramMaxValue = 100;
-            HistorgamValue = 50;
+            HistogramMaxValue = 200;
+            OxygenInPercents = 0;
+            TemperatureInCelsius = (decimal)0;
             DeviceScreenVisibility = Visibility.Hidden;
             HistogramScale = PERCENT;
             IsTemperatureScaleVisible = false;
             HoldIndicatorVisibility = Visibility.Hidden;
+            DataProvider.DataChanged += OnChange;
         }
 
         #region Properties
@@ -229,12 +234,11 @@ namespace Emulator.ViewModel
             // replace with getting info from data provider
             IsTemperatureScaleVisible = true;
             HistoryItem = null;
-            OxygenInPercents = 50;
 
             HistogramMinValue = measureLimits[GetMeasureSetting()].Key;
             HistogramMaxValue = measureLimits[GetMeasureSetting()].Value;
             HistorgamValue = ConvertMeasureValue(OxygenInPercents, PERCENT, GetMeasureSetting());
-            TemperatureInCelsius = (decimal) 28.9;
+            
             BigScreenText = ConvertValueToString(ConvertMeasureValue(OxygenInPercents, PERCENT, GetMeasureSetting()));
             LittleScreenText =
                 ConvertTemperatureToString(TemperatureScale == TemperatureScale.Celsius
@@ -254,6 +258,7 @@ namespace Emulator.ViewModel
             BigScreenText = "SELF";
             LittleScreenText = "CAL";
             await Task.Delay(3000);
+            InitData();
             ExitechStateMachine.Fire(ExitechDeviceTriggers.TimerTick);
         }
 
@@ -292,6 +297,7 @@ namespace Emulator.ViewModel
                 HistoryItem = HistoryItem ?? 0;
                 LittleScreenText = (HistoryItem + 1).ToString();
                 BigScreenText = ConvertValueToString(ConvertToCurrentValue(ValuesHistory[HistoryItem.Value]));
+                HistorgamValue = ConvertToCurrentValue(ValuesHistory[HistoryItem.Value]);
                 IsTemperatureScaleVisible = false;
                 HistoryItem = (HistoryItem + 1)%ValuesHistory.Count;
             }
@@ -414,10 +420,35 @@ namespace Emulator.ViewModel
             return String.Empty;
         }
 
+        public void OnChange(object sender, EventArgs eventArgs)
+        {
+            InitData();
+        }
+
+        private void InitData()
+        {
+            var data = DataProvider.GetData();
+            TemperatureInCelsius = (decimal) data.Temperature;
+            OxygenInPercents = (decimal) data.Oxygen;
+            ExitechStateMachine.Fire(ExitechDeviceTriggers.DataChanged);
+        }
+
+        /// <summary>
+        /// Class HistoryModel.
+        /// </summary>
         public class HistoryModel
         {
             public decimal Value { get; set; }
             public string MeasureSetting { get; set; }
+        }
+
+        public void OnTemperatureSettingEntry()
+        {
+            TemperatureScale = TemperatureScale == TemperatureScale.Celsius
+                ? TemperatureScale.Fahrenheit
+                : TemperatureScale.Celsius;
+            BigScreenText = "TEMP";
+            LittleScreenText = TemperatureScale == TemperatureScale.Celsius ? "°C" : "°F";
         }
     }
 }
