@@ -399,7 +399,7 @@ namespace Emulator.ViewModel
 
         private static string ConvertTemperatureToString(decimal value)
         {
-            return $"{value:##.0}";
+            return $"{value:###.0}";
         }
 
         private string ConvertValueToString(decimal value)

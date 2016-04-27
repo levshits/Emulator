@@ -5,6 +5,7 @@
          OnModeButtonClick,
          OnModeButtonLongClick,
          OnModeButtonDoubleClick,
-         TimerTick
+         TimerTick,
+         DataChanged
     }
 }

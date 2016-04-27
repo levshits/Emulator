@@ -5,8 +5,9 @@
         public int Id { get; set; }
         public string Name { get; set; }
         public double Oxygen { get; set; }
-        public double Conductivity { get; set; }
-        public double Ph { get; set; }
+        public double EC { get; set; }
+        public double PH { get; set; }
+        public double TDS { get; set; }
         public double Temperature { get; set; }
 
         public VariantModel CreateCopy()
@@ -16,8 +17,9 @@
                 Id = Id,
                 Name = Name,
                 Oxygen = Oxygen,
-                Conductivity = Conductivity,
-                Ph = Ph,
+                EC = EC,
+                PH = PH,
+                TDS = TDS,
                 Temperature = Temperature
             };
         }

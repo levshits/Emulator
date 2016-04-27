@@ -25,8 +25,9 @@ namespace Emulator.Data
         {
             _data.Temperature = _data.Temperature*filter.TemperatureCoefficient;
             _data.Oxygen = _data.Oxygen * filter.OxygenCoefficient;
-            _data.Conductivity = _data.Conductivity * filter.ConductivityCoefficient;
-            _data.Ph = _data.Ph * filter.PhCoefficient;
+            _data.EC = _data.EC * filter.ECCoefficient;
+            _data.TDS = _data.TDS * filter.TDSCoefficient;
+            _data.PH = _data.PH * filter.PHCoefficient;
             DataChanged?.Invoke(this, null);
         }
 

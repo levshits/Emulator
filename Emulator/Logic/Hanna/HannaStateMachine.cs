@@ -29,11 +29,12 @@ namespace Emulator.Logic.Hanna
                 .Permit(HannaDeviceTriggers.OnModeButtonClick, HannaDeviceStates.Loading);
             
             StateMachine.Configure(HannaDeviceStates.Loading)
-                .OnEntry(HannaDeviceViewModel.Initialize)
+                .OnEntry(async ()=> await HannaDeviceViewModel.Initialize())
                 .Permit(HannaDeviceTriggers.TimerTick, HannaDeviceStates.Enabled);
 
             StateMachine.Configure(HannaDeviceStates.Enabled)
                 .OnEntry(HannaDeviceViewModel.EnableDevice)
+                .PermitReentry(HannaDeviceTriggers.DataChanged)
                 .Permit(HannaDeviceTriggers.OnModeButtonClick, HannaDeviceStates.Disabled);
 
         }

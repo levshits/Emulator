@@ -24,5 +24,6 @@
     <property name="HannaOnModeButtonCommand" ref="HannaOnModeButtonCommand"/>
     <property name="HannaSetHoldButtonCommand" ref="HannaSetHoldButtonCommand"/>
     <property name="HannaStateMachine" ref="HannaStateMachine" />
+    <property name="DataProvider" ref="IDataProvider" />
   </object>
 </objects>

@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using Emulator.Common.Interfaces;
 using Emulator.Logic.Hanna;
 using Emulator.Model;
 
@@ -19,20 +21,39 @@ namespace Emulator.ViewModel
         private Visibility _phIndicatorVisibility;
         private HannaScaleMode _mode;
         private Visibility _deviceScreenVisibility;
+        private decimal _temperatureInCelsius;
+        private decimal _ec;
+        private decimal _tds;
+        private decimal _ph;
+        private bool _isTemperatureVisible;
         public string DeviceName => "Hanna";
         public ICommand HannaOnModeButtonCommand { get; set; }
         public ICommand HannaSetHoldButtonCommand { get; set; }
         public HannaStateMachine HannaStateMachine { get; set; }
+        public IDataProvider DataProvider { get; set; }
 
         public void OnInit()
         {
+            DataProvider.DataChanged += OnChange;
             DeviceScreenVisibility = Visibility.Hidden;
-            LittleScreenText = 100.ToString();
-            BigScreenText = 200.ToString();
+            CalIndicatorVisibility = Visibility.Hidden;
             Mode = HannaScaleMode.Ph;
+            TemperatureScale = TemperatureScale.Celsius;
         }
 
         #region Properties
+
+        public bool IsTemperatureVisible
+        {
+            get { return _isTemperatureVisible; }
+            set
+            {
+                _isTemperatureVisible = value; 
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(CelsiusIndicatorVisibility));
+                OnPropertyChanged(nameof(FahrengeitIndicatorVisibility));
+            }
+        }
 
         public TemperatureScale TemperatureScale
         {
@@ -166,26 +187,127 @@ namespace Emulator.ViewModel
             }
         }
 
+        public decimal TemperatureInCelsius
+        {
+            get { return _temperatureInCelsius; }
+            set
+            {
+                _temperatureInCelsius = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public decimal PH
+        {
+            get { return _ph; }
+            set
+            {
+                _ph = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public decimal EC
+        {
+            get { return _ec; }
+            set
+            {
+                _ec = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public decimal TDS { 
+            get { return _tds; }
+            set
+            {
+                _tds = value;
+                OnPropertyChanged();
+            }
+        }
+
         #endregion Properties
 
         #region Actions
 
         public void EnableDevice()
         {
-            DeviceScreenVisibility = Visibility.Visible;
+            BigScreenText = ConvertValueToString(GetDeviceValue());
+            LittleScreenText =
+                ConvertTemperatureToString(TemperatureScale == TemperatureScale.Celsius
+                    ? TemperatureInCelsius
+                    : ConvertCelsiusToFarengeit(TemperatureInCelsius));
+            IsTemperatureVisible = true;
         }
 
         public void DisableDevice()
         {
             DeviceScreenVisibility = Visibility.Hidden;
         }
-        public void Initialize()
+        public async Task Initialize()
         {
+            DeviceScreenVisibility = Visibility.Visible;
             BigScreenText = "Init";
-            Thread.Sleep(500);
+            InitData();
+            await Task.Delay(3000);
             HannaStateMachine.Fire(HannaDeviceTriggers.TimerTick);
         }
+        private static decimal ConvertCelsiusToFarengeit(decimal value)
+        {
+            return value * (decimal)1.80 + 32;
+        }
 
+        private static string ConvertTemperatureToString(decimal value)
+        {
+            return $"{value:###.0}";
+        }
+        private string ConvertValueToString(decimal value)
+        {
+            if (Mode == HannaScaleMode.Ph)
+            {
+                return $"{value:##.00}";
+            }
+            else if (Mode == HannaScaleMode.Ppt)
+            {
+                return $"{value:###.00}";
+            }
+            else if (Mode == HannaScaleMode.Mscm)
+            {
+                return $"{value:##.00}";
+            }
+            return String.Empty;
+        }
+
+        private decimal GetDeviceValue()
+        {
+            if (Mode == HannaScaleMode.Ph)
+            {
+                return PH;
+            }
+            else if (Mode == HannaScaleMode.Ppt)
+            {
+                return TDS;
+            }
+            else if (Mode == HannaScaleMode.Mscm)
+            {
+                return EC;
+            }
+            return 0;
+        }
+
+        private void OnChange(object sender, EventArgs eventArgs)
+        {
+            InitData();
+        }
+        private void InitData()
+        {
+            var data = DataProvider.GetData();
+            TemperatureInCelsius = (decimal)data.Temperature;
+            TDS = (decimal)data.TDS;
+            EC = (decimal)data.EC;
+            PH = (decimal)data.PH;
+            HannaStateMachine.Fire(HannaDeviceTriggers.DataChanged);
+        }
         #endregion Actions
     }
 }

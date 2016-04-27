@@ -6,8 +6,9 @@
         public string Name { get; set; }
         public string Description { get; set; }
         public double OxygenCoefficient { get; set; }
-        public double ConductivityCoefficient { get; set; }
-        public double PhCoefficient { get; set; }
+        public double ECCoefficient { get; set; }
+        public double TDSCoefficient { get; set; }
+        public double PHCoefficient { get; set; }
         public double TemperatureCoefficient { get; set; }
     }
 }
