@@ -327,7 +327,7 @@
                                     Command="{Binding ResetCommand}" />
                         </StackPanel>
                     </Grid>
-                    <Grid Height="250">
+                    <Grid Height="250" Visibility="Collapsed">
                         <Image Margin="5" Source="../Images/1.jpg" Height="250" StretchDirection="UpOnly" />
                     </Grid>
                 </StackPanel>
