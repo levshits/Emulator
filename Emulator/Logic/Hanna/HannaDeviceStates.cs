@@ -4,6 +4,10 @@
     {
         Enabled,
         Loading,
-        Disabled
+        Disabled,
+        Measure,
+        TempSettings,
+        Hold,
+        Disabling
     }
 }

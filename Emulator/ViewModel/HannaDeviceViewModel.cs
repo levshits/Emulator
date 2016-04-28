@@ -247,7 +247,8 @@ namespace Emulator.ViewModel
         public async Task Initialize()
         {
             DeviceScreenVisibility = Visibility.Visible;
-            BigScreenText = "Init";
+            BigScreenText = "100";
+            LittleScreenText = "BATT";
             InitData();
             await Task.Delay(3000);
             HannaStateMachine.Fire(HannaDeviceTriggers.TimerTick);
@@ -309,5 +310,38 @@ namespace Emulator.ViewModel
             HannaStateMachine.Fire(HannaDeviceTriggers.DataChanged);
         }
         #endregion Actions
+
+        private List<HannaScaleMode> _hannaScaleModes = new List<HannaScaleMode> {HannaScaleMode.Ph, HannaScaleMode.Ppt, HannaScaleMode.Mscm}; 
+        public void OnSetHoldButtonClickInMeasureState()
+        {
+            var index = _hannaScaleModes.IndexOf(Mode);
+            Mode = _hannaScaleModes[(index + 1)%_hannaScaleModes.Count];
+            EnableDevice();
+        }
+
+        public void OnHoldEntry()
+        {
+            LittleScreenText = "HOLD";
+        }
+
+        public void OnTempSettingEntry()
+        {
+            BigScreenText = "TEMP";
+            LittleScreenText = TemperatureScale == TemperatureScale.Celsius ? "°C" : "°F";
+        }
+
+        public void OnSetHoldButtonClickInTempSettingsState()
+        {
+            TemperatureScale = TemperatureScale == TemperatureScale.Celsius
+                ? TemperatureScale.Fahrenheit
+                : TemperatureScale.Celsius;
+            OnTempSettingEntry();
+        }
+
+        public void OnDisablingEntry()
+        {
+            BigScreenText = "";
+            LittleScreenText = "OFF";
+        }
     }
 }

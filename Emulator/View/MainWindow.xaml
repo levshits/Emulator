@@ -191,13 +191,15 @@
                     <Image x:Name="___Emulator_component_21_01_png" Margin="-133.545,-27,-137,199.058"
                            Source="/Emulator;component/21-01.png" Stretch="Fill" />
                     <Grid Height="82.5" Margin="98,88.446,93,0" VerticalAlignment="Top" Visibility="{Binding DeviceScreenVisibility}">
-                        <TextBlock TextAlignment="Right" HorizontalAlignment="Right" Margin="29.28,19.333,10,30.667"
+                        <TextBlock TextAlignment="Right" HorizontalAlignment="Right" Margin="0,19,10,30.5"
                                    TextWrapping="Wrap" Text="{Binding BigScreenText}" FontFamily="Ticking Timebomb BB"
-                                   FontSize="40" Width="Auto" d:LayoutOverrides="Width" d:IsLocked="True" />
-                        <TextBlock TextAlignment="Right" HorizontalAlignment="Right" Margin="29.28,0,21.333,3.667"
+                                   FontSize="40" Width="89" RenderTransformOrigin="0.5,0.5" >
+                        </TextBlock>
+                        <TextBlock TextAlignment="Right" HorizontalAlignment="Right" Margin="0,0,21,3.5"
                                    TextWrapping="Wrap" Text="{Binding LittleScreenText}"
-                                   FontFamily="Ticking Timebomb BB" FontSize="26.667" Width="Auto" Height="27"
-                                   VerticalAlignment="Bottom" />
+                                   FontFamily="Ticking Timebomb BB" FontSize="26.667" Width="70" Height="27"
+                                   VerticalAlignment="Bottom" >
+                        </TextBlock>
                         <TextBlock TextAlignment="Right" HorizontalAlignment="Right" Margin="0,0,8.279,15.834"
                                    TextWrapping="Wrap" Text="°F" Visibility="{Binding FahrengeitIndicatorVisibility}"
                                    FontFamily="Ticking Timebomb BB" FontSize="13.333" Width="13.054" Height="13.5"
@@ -302,7 +304,7 @@
                         <ToggleButton Content="ToggleButton" IsChecked="{Binding IsExitecSelected}" />
                     </StackPanel>
                     <ScrollViewer Height="571" VerticalScrollBarVisibility="Disabled" Margin="0,10,0,0">
-                        <ContentControl Content="{Binding DeviceModel}" Height="913" Width="302" />
+                        <ContentControl Content="{Binding DeviceModel}" Height="913" Width="302"/>
                     </ScrollViewer>
                 </StackPanel>
             </Grid>
@@ -325,7 +327,7 @@
                                     Command="{Binding ResetCommand}" />
                         </StackPanel>
                     </Grid>
-                    <Grid Height="250">
+                    <Grid Height="250" Visibility="Collapsed">
                         <Image Margin="5" Source="../Images/1.jpg" Height="250" StretchDirection="UpOnly" />
                     </Grid>
                 </StackPanel>

@@ -10,8 +10,15 @@ namespace Emulator.Logic
             return true;
         }
 
+        public override void DoReleaseExecute()
+        {
+            base.DoReleaseExecute();
+            HannaStateMachine.Fire(HannaDeviceTriggers.OnModeButtonRelease);
+        }
+
         protected override void TimerHandler(object state)
         {
+            base.TimerHandler(state);
             HannaStateMachine.Fire(HannaDeviceTriggers.OnModeButtonLongClick);
         }
 

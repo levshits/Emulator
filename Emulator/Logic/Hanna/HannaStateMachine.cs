@@ -26,16 +26,41 @@ namespace Emulator.Logic.Hanna
 
             StateMachine.Configure(HannaDeviceStates.Disabled)
                 .OnEntry(HannaDeviceViewModel.DisableDevice)
-                .Permit(HannaDeviceTriggers.OnModeButtonClick, HannaDeviceStates.Loading);
+                .Permit(HannaDeviceTriggers.OnModeButtonDoubleClick, HannaDeviceStates.Loading);
             
             StateMachine.Configure(HannaDeviceStates.Loading)
                 .OnEntry(async ()=> await HannaDeviceViewModel.Initialize())
-                .Permit(HannaDeviceTriggers.TimerTick, HannaDeviceStates.Enabled);
+                .Permit(HannaDeviceTriggers.TimerTick, HannaDeviceStates.Measure);
 
-            StateMachine.Configure(HannaDeviceStates.Enabled)
+            StateMachine.Configure(HannaDeviceStates.Measure)
+                .SubstateOf(HannaDeviceStates.Enabled)
                 .OnEntry(HannaDeviceViewModel.EnableDevice)
+                .OnEntryFrom(HannaDeviceTriggers.SetHoldButtonClick, HannaDeviceViewModel.OnSetHoldButtonClickInMeasureState)
                 .PermitReentry(HannaDeviceTriggers.DataChanged)
-                .Permit(HannaDeviceTriggers.OnModeButtonClick, HannaDeviceStates.Disabled);
+                .PermitReentry(HannaDeviceTriggers.SetHoldButtonClick)
+                .Permit(HannaDeviceTriggers.OnModeButtonLongClick, HannaDeviceStates.TempSettings)
+                .Permit(HannaDeviceTriggers.SetHoldButtonLongClick, HannaDeviceStates.Hold);
+
+            StateMachine.Configure(HannaDeviceStates.Hold)
+                .SubstateOf(HannaDeviceStates.Enabled)
+                .OnEntry(HannaDeviceViewModel.OnHoldEntry)
+                .Permit(HannaDeviceTriggers.OnModeButtonClick, HannaDeviceStates.Measure)
+                .Permit(HannaDeviceTriggers.SetHoldButtonClick, HannaDeviceStates.Measure);
+
+            StateMachine.Configure(HannaDeviceStates.TempSettings)
+                .SubstateOf(HannaDeviceStates.Enabled)
+                .OnEntry(HannaDeviceViewModel.OnTempSettingEntry)
+                .OnEntryFrom(HannaDeviceTriggers.SetHoldButtonClick,
+                    HannaDeviceViewModel.OnSetHoldButtonClickInTempSettingsState)
+                .PermitReentry(HannaDeviceTriggers.SetHoldButtonClick)
+                .Permit(HannaDeviceTriggers.OnModeButtonLongClick, HannaDeviceStates.Disabling)
+                .Permit(HannaDeviceTriggers.OnModeButtonDoubleClick, HannaDeviceStates.Measure);
+
+            StateMachine.Configure(HannaDeviceStates.Disabling)
+                .OnEntry(HannaDeviceViewModel.OnDisablingEntry)
+                .Permit(HannaDeviceTriggers.OnModeButtonLongClick, HannaDeviceStates.Measure)
+                .Permit(HannaDeviceTriggers.OnModeButtonRelease, HannaDeviceStates.Disabled);
+
 
         }
     }
