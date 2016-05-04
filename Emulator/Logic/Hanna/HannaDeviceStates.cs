@@ -1,5 +1,8 @@
 ﻿namespace Emulator.Logic.Hanna
 {
+    /// <summary>
+    /// Список состояний прибора
+    /// </summary>
     public enum HannaDeviceStates
     {
         Enabled,

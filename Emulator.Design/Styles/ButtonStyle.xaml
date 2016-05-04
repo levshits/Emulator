@@ -15,6 +15,7 @@
     <SolidColorBrush x:Key="ExitecRoundButtonFocused" Color="{StaticResource ExitecRoundButtonFocusedColor}"/>
     <SolidColorBrush x:Key="ExitecRoundButtonPressed" Color="{StaticResource ExitecRoundButtonPressedColor}"/>
 
+    <!--Стили кастомных кнопок -->
 
     <Style TargetType="{x:Type Button}" x:Key="RoundedButton">
         <Setter Property="HorizontalAlignment" Value="Center" />

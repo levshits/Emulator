@@ -6,6 +6,10 @@ using Stateless;
 
 namespace Emulator.Logic.Hanna
 {
+    /// <summary>
+    /// Машина состояний для прибора Hanna
+    /// Данный класс конфигурирует поведение кнопок для различных состояний прибора
+    /// </summary>
     public class HannaStateMachine: DeviceStateMachineBase<HannaDeviceStates, HannaDeviceTriggers>
     {
         protected static readonly ILog Log = LogManager.GetLogger<HannaStateMachine>();

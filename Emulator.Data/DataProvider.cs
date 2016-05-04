@@ -13,6 +13,11 @@ using NPOI.XSSF.UserModel;
 
 namespace Emulator.Data
 {
+    /// <summary>
+    /// Класс работы с внешними данными.
+    /// Реализуется поддержка работы с Excel.
+    /// Стоило вынести имя файла в конфигурацию приложения
+    /// </summary>
     public class DataProvider: IDataProvider
     {
         private VariantModel _data;

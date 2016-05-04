@@ -1,5 +1,8 @@
 ﻿namespace Emulator.Logic.Exitech
 {
+    /// <summary>
+    /// Список состояний прибора
+    /// </summary>
     public enum ExitechDeviceStates
     {
         Enabled,

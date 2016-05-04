@@ -10,6 +10,9 @@ using MaterialDesignThemes.Wpf;
 
 namespace Emulator.Logic
 {
+    /// <summary>
+    /// Команда для кнопки применения фильтра
+    /// </summary>
     public class ApplyFilterCommand : ICommand
     {
         public IDataProvider DataProvider { get; set; }

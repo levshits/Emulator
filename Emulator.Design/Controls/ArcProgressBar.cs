@@ -5,6 +5,9 @@ using System.Windows.Media;
 
 namespace Emulator.Design.Controls
 {
+    /// <summary>
+    /// Кастомизированный контрол прогрессбара. Реализует логику прогрессбара-дуги
+    /// </summary>
     public class ArcProgressBar: ProgressBar
     {
         public static readonly DependencyProperty MinValueLabelProperty = DependencyProperty.Register("MinValueLabel",

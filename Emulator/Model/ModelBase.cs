@@ -4,6 +4,9 @@ using Emulator.Properties;
 
 namespace Emulator.Model
 {
+    /// <summary>
+    /// Базовый класс для модели
+    /// </summary>
     public class ModelBase : INotifyPropertyChanged
     {
         #region INotifyPropertyChanged

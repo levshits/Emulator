@@ -1,5 +1,8 @@
 ﻿namespace Emulator.Logic.Exitech
 {
+    /// <summary>
+    /// Список обрабатываемых событий для прибора
+    /// </summary>
     public enum ExitechDeviceTriggers
     {
         OnOffButtonClick,

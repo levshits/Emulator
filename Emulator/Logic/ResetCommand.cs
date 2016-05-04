@@ -6,6 +6,9 @@ using Emulator.ViewModel;
 
 namespace Emulator.Logic
 {
+    /// <summary>
+    /// Команда сброса данных до исходных
+    /// </summary>
     public class ResetCommand: ICommand
     {
         private static readonly ILog Log = LogManager.GetLogger(typeof(ResetCommand));

@@ -3,6 +3,7 @@
                     xmlns:local="clr-namespace:Emulator.Design"
                     xmlns:controls="clr-namespace:Emulator.Design.Controls"
                     xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing">
+    <!--Стили кастомного прогресс бара -->
     <Style x:Key="ArcProgressBarStyle" TargetType="{x:Type controls:ArcProgressBar}">
         <Setter Property="Foreground" Value="{DynamicResource PrimaryHueDarkBrush}"/>
         <Setter Property="Background" Value="{DynamicResource PrimaryHueLightBrush}"/>

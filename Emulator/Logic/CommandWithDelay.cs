@@ -6,6 +6,9 @@ using Emulator.Model;
 
 namespace Emulator.Logic
 {
+    /// <summary>
+    /// Базовй класс для всех комманд кнопок прибороы
+    /// </summary>
     public abstract class CommandWithDelay : ICommand
     {
         protected static readonly ILog Log = LogManager.GetLogger<CommandWithDelay>();

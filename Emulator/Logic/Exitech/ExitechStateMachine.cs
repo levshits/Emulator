@@ -5,6 +5,9 @@ using Stateless;
 
 namespace Emulator.Logic.Exitech
 {
+    /// <summary>
+    /// Машина состояний для прибора Exitech
+    /// </summary>
     public class ExitechStateMachine : DeviceStateMachineBase<ExitechDeviceStates, ExitechDeviceTriggers>
     {
         protected static readonly ILog Log = LogManager.GetLogger<ExitechStateMachine>();
