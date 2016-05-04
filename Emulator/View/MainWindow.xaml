@@ -65,20 +65,20 @@
                         <Grid Visibility="{Binding DeviceScreenVisibility}" Height="97" Margin="243,199,267.05,0"
                               VerticalAlignment="Top" HorizontalAlignment="Stretch" Width="Auto">
                             <TextBlock x:Name="bigScreen" Margin="10,0,9.95,12" TextWrapping="Wrap"
-                                       FontFamily="Digital-7 Mono" FontSize="26.667" Height="30"
+                                       FontFamily="/Emulator;component/Fonts/#Digital-7 Mono" FontSize="26.667" Height="30"
                                        VerticalAlignment="Bottom" Text="{Binding BigScreenText}" TextAlignment="Right" />
                             <TextBlock x:Name="littleScreen" Margin="29.884,0,12.007,-8.659" TextWrapping="Wrap"
-                                       VerticalAlignment="Bottom" FontFamily="Digital-7 Mono" FontSize="18.667"
+                                       VerticalAlignment="Bottom" FontFamily="/Emulator;component/Fonts/#Digital-7 Mono" FontSize="18.667"
                                        Height="19.025" Text="{Binding LittleScreenText}" TextAlignment="Right" />
-                            <TextBlock Visibility="{Binding HoldIndicatorVisibility}" Height="Auto" Margin="0,80,45,0" FontFamily="Digital-7 Mono" TextAlignment="Right" Width="30">Hold</TextBlock>
+                            <TextBlock Visibility="{Binding HoldIndicatorVisibility}" Height="Auto" Margin="0,80,45,0" FontFamily="/Emulator;component/Fonts/#Digital-7 Mono" TextAlignment="Right" Width="30">Hold</TextBlock>
                             <TextBlock Visibility="{Binding CelsiusIndicatorVisibility}" x:Name="ctemp"
                                        Margin="0,80.975,0,1.322" TextWrapping="Wrap" Text="°C"
-                                       VerticalAlignment="Stretch" FontFamily="Digital-7 Mono" FontSize="9.333"
+                                       VerticalAlignment="Stretch" FontFamily="/Emulator;component/Fonts/#Digital-7 Mono" FontSize="9.333"
                                        Height="Auto" RenderTransformOrigin="1.119,0.093" HorizontalAlignment="Right"
                                        Width="12.007" />
                             <TextBlock Visibility="{Binding FahrengeitIndicatorVisibility}" x:Name="ftemp"
                                        Margin="0,80.921,0.5,1.376" TextWrapping="Wrap" Text="°F"
-                                       VerticalAlignment="Stretch" FontFamily="Digital-7 Mono" FontSize="9.333"
+                                       VerticalAlignment="Stretch" FontFamily="/Emulator;component/Fonts/#Digital-7 Mono" FontSize="9.333"
                                        Height="Auto" RenderTransformOrigin="1.119,0.093" HorizontalAlignment="Right"
                                        Width="12.007" />
                             <controls:ArcProgressBar Height="Auto" Margin="2.943,10.171,5,49.704"
@@ -90,7 +90,7 @@
                             <TextBlock TextAlignment="Center" Margin="22.999,25.779,23.73,0" TextWrapping="Wrap"
                                        Text="{Binding HistogramScale}" FontSize="8" Height="7.901"
                                        VerticalAlignment="Top" RenderTransformOrigin="0.072,0.336"
-                                       FontFamily="Ticking Timebomb BB" />
+                                       FontFamily="/Emulator;component/Fonts/#Ticking Timebomb BB" />
 
                         </Grid>
                         <StackPanel Margin="244.331,348.334,265.719,328.666" Height="Auto" VerticalAlignment="Stretch"
@@ -192,47 +192,47 @@
                            Source="/Emulator;component/21-01.png" Stretch="Fill" />
                     <Grid Height="82.5" Margin="98,88.446,93,0" VerticalAlignment="Top" Visibility="{Binding DeviceScreenVisibility}">
                         <TextBlock TextAlignment="Right" HorizontalAlignment="Right" Margin="0,19,10,30.5"
-                                   TextWrapping="Wrap" Text="{Binding BigScreenText}" FontFamily="Ticking Timebomb BB"
+                                   TextWrapping="Wrap" Text="{Binding BigScreenText}" FontFamily="/Emulator;component/Fonts/#Ticking Timebomb BB"
                                    FontSize="40" Width="89" RenderTransformOrigin="0.5,0.5" >
                         </TextBlock>
                         <TextBlock TextAlignment="Right" HorizontalAlignment="Right" Margin="0,0,21,3.5"
                                    TextWrapping="Wrap" Text="{Binding LittleScreenText}"
-                                   FontFamily="Ticking Timebomb BB" FontSize="26.667" Width="70" Height="27"
+                                   FontFamily="/Emulator;component/Fonts/#Ticking Timebomb BB" FontSize="26.667" Width="70" Height="27"
                                    VerticalAlignment="Bottom" >
                         </TextBlock>
                         <TextBlock TextAlignment="Right" HorizontalAlignment="Right" Margin="0,0,8.279,15.834"
                                    TextWrapping="Wrap" Text="°F" Visibility="{Binding FahrengeitIndicatorVisibility}"
-                                   FontFamily="Ticking Timebomb BB" FontSize="13.333" Width="13.054" Height="13.5"
+                                   FontFamily="/Emulator;component/Fonts/#Ticking Timebomb BB" FontSize="13.333" Width="13.054" Height="13.5"
                                    VerticalAlignment="Bottom" RenderTransformOrigin="0.817,1.358" />
                         <TextBlock TextAlignment="Right" HorizontalAlignment="Right" Margin="0,0,8.279,3.667"
                                    TextWrapping="Wrap" Text="°C" Visibility="{Binding CelsiusIndicatorVisibility}"
-                                   FontFamily="Ticking Timebomb BB" FontSize="13.333" Width="13.054" Height="13.5"
+                                   FontFamily="/Emulator;component/Fonts/#Ticking Timebomb BB" FontSize="13.333" Width="13.054" Height="13.5"
                                    VerticalAlignment="Bottom" RenderTransformOrigin="0.817,1.358" />
                         <StackPanel Orientation="Horizontal" Height="22" VerticalAlignment="Top">
                             <TextBlock TextAlignment="Right" HorizontalAlignment="Left" Margin="10,8,0,0"
-                                       TextWrapping="Wrap" Text="ATC" FontFamily="Ticking Timebomb BB" FontSize="9.333"
+                                       TextWrapping="Wrap" Text="ATC" FontFamily="/Emulator;component/Fonts/#Ticking Timebomb BB" FontSize="9.333"
                                        Width="13.054" Height="7.167" VerticalAlignment="Top"
                                        RenderTransformOrigin="0.817,1.358" />
                             <TextBlock TextAlignment="Right" Margin="6,8,0,0" TextWrapping="Wrap" Text="ppt"
-                                       FontFamily="Ticking Timebomb BB" Visibility="{Binding PptIndicatorVisibility}"
+                                       FontFamily="/Emulator;component/Fonts/#Ticking Timebomb BB" Visibility="{Binding PptIndicatorVisibility}"
                                        FontSize="9.333" Width="Auto" Height="14" VerticalAlignment="Top"
                                        RenderTransformOrigin="0.817,1.358" />
                             <TextBlock TextAlignment="Right" HorizontalAlignment="Right" Margin="6,8,0,0"
                                        TextWrapping="Wrap" Text="mS/cm" Visibility="{Binding MscmIndicatorVisibility}"
-                                       FontFamily="Ticking Timebomb BB" FontSize="9.333" Width="Auto" Height="14"
+                                       FontFamily="/Emulator;component/Fonts/#Ticking Timebomb BB" FontSize="9.333" Width="Auto" Height="14"
                                        VerticalAlignment="Top" RenderTransformOrigin="0.817,1.358" />
                             <TextBlock TextAlignment="Right" HorizontalAlignment="Right" Margin="6,8,0,0"
                                        TextWrapping="Wrap" Text="pH" Visibility="{Binding PhIndicatorVisibility}"
-                                       FontFamily="Ticking Timebomb BB" FontSize="9.333" Width="Auto" Height="13.5"
+                                       FontFamily="/Emulator;component/Fonts/#Ticking Timebomb BB" FontSize="9.333" Width="Auto" Height="13.5"
                                        VerticalAlignment="Top" RenderTransformOrigin="0.817,1.358" />
 
                         </StackPanel>
                         <TextBlock TextAlignment="Right" HorizontalAlignment="Left" Margin="1.5,0,0,13"
-                                   TextWrapping="Wrap" Text="Cal" FontFamily="Ticking Timebomb BB" FontSize="9.333"
+                                   TextWrapping="Wrap" Text="Cal" FontFamily="/Emulator;component/Fonts/#Ticking Timebomb BB" FontSize="9.333"
                                    Width="16.054" Height="8.834" VerticalAlignment="Bottom"
                                    RenderTransformOrigin="0.817,1.358"  Visibility="{Binding CalIndicatorVisibility}"/>
                         <TextBlock TextAlignment="Right" HorizontalAlignment="Left" Margin="6.004,0,0,30.667"
-                                   TextWrapping="Wrap" Text="%" FontFamily="Ticking Timebomb BB" FontSize="9.333"
+                                   TextWrapping="Wrap" Text="%" FontFamily="/Emulator;component/Fonts/#Ticking Timebomb BB" FontSize="9.333"
                                    Width="10.054" Height="9.667" VerticalAlignment="Bottom"
                                    RenderTransformOrigin="0.817,1.358" Visibility="Hidden"/>
                     </Grid>
@@ -296,6 +296,8 @@
         <viewModel:MainViewModel />
     </Window.DataContext>
     <Grid>
+        <materialDesign:DialogHost Identifier="RootDialog">
+            
         <DockPanel>
             <Grid Width="302">
                 <StackPanel Orientation="Vertical" d:LayoutOverrides="Height">
@@ -351,7 +353,7 @@
 
         </DockPanel>
 
-
+        </materialDesign:DialogHost>
     </Grid>
 </Window>
 
